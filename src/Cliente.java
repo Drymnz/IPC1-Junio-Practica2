@@ -6,7 +6,9 @@ public class Cliente {
     private boolean tienePeliculaPrestada = false; 
 
     public Cliente (String nombre , int ID ,int telefono) {
-        
+        this.nombre =  nombre;
+        this.ID = ID;
+        this.telefono = telefono;
     }
 
     public void setTienePeliculaPrestada(boolean tienePeliculaPrestada){
