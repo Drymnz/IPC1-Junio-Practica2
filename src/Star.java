@@ -42,7 +42,8 @@ public class Star {
                             salir = true;
                          break;
                     case "1":
-
+                    almacen.mostarCatalogo();
+                    almacen.alquilar(usario);
                          break;
                     case "2":
                             devolverPelicula(usario);

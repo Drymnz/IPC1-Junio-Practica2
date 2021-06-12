@@ -35,9 +35,15 @@ public class Catalogo {
             if (opcion.equals("0")) {
                 salir = true;
             } else {
-                // convierto el opcion a int revisar por si errores aconsejable usar un try caht para capturar el error
-                int ID = Integer.parseInt(opcion);
-                salir = reservar(usario, ID);
+                if (usario != null) {
+                    // convierto el opcion a int revisar por si errores aconsejable usar un try caht para capturar el error
+                     int ID = Integer.parseInt(opcion);
+                     salir = reservar(usario, ID);
+                } else {
+                    System.out.println("Registrese porfavor");
+                    usario = Star.registro();
+                }
+                
             }
           
         }
