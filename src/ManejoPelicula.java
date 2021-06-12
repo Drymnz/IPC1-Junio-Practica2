@@ -21,7 +21,7 @@ public class ManejoPelicula {
     public void verCatalogo(){
         for (int i = 0; i < listadoPelicula.length; i++) {
             if (listadoPelicula[i] != null) {
-                System.out.println("ID<"+listadoPelicula[i].ID+">NOMBRE DE LA PELICULA:<" +listadoPelicula[i].nombre +"> AÑO <"+listadoPelicula[i].fecha+"> CATEGORIA <"+listadoPelicula[i].categoria+">" );
+                System.out.println("ID<"+Star.colores(3)+listadoPelicula[i].ID+Star.colores(0)+">NOMBRE DE LA PELICULA:<" +Star.colores(3)+listadoPelicula[i].nombre +Star.colores(0)+"> AÑO <"+Star.colores(3)+listadoPelicula[i].fecha+Star.colores(0)+"> CATEGORIA <"+Star.colores(3)+listadoPelicula[i].categoria+Star.colores(0)+">" );
             }else{
                 i = listadoPelicula.length;
             }

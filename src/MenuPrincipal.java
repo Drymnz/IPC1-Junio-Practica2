@@ -17,6 +17,7 @@ public class MenuPrincipal {
             System.out.println("<presione 2> Devolver pelicula (NOTA:REQUISITOS TENER UNA PELICULA)");
             System.out.println("<presione 3> Registrase cliente");
             System.out.println("<presione 4> Busacar cliente");
+            System.out.println("<presione 5> Busacar cliente");
             System.out.println("<presione 0> Salir del programa");
             String opcion = entradad.nextLine();
                 switch (opcion) {
@@ -33,9 +34,9 @@ public class MenuPrincipal {
                         usario = registro();
                          break;
                     case "4":
-                        usario = buscarCliente();
                          break;
-                    default:
+                    case "5":
+                        usario = buscarCliente();
                          break;
                  }  
         }
