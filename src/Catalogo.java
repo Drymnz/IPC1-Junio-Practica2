@@ -41,7 +41,7 @@ public class Catalogo {
                      int ID = Integer.parseInt(opcion);
                      salir = reservar(usario, ID);
                 } else {
-                    System.out.println("Registrese porfavor");
+                    System.out.println("Ingrese un cliente");
                     usario = Star.registro();
                 }
                 
@@ -54,7 +54,7 @@ public class Catalogo {
     public boolean reservar(Cliente usario,int ID){
         Scanner entrada = new Scanner(System.in);
         Pelicula alguilar = buscarPelicula(ID);
-        if (existePelicula(ID) && (alguilar.getDisponible())) {
+        if (existePelicula(ID) && (alguilar.getDisponible()) && !(usario.getTienePeliculaPrestada())) {
             System.out.println("Cuantos dias la queres");
             int diasPrestada = entrada.nextInt();
             prestaPelicula(alguilar, usario, diasPrestada);
@@ -80,7 +80,6 @@ public class Catalogo {
         Scanner entrada = new Scanner(System.in);
         System.out.println("Ingrese el nombre");
         String nombre = entrada.nextLine();
-        entrada.next();
         System.out.println("Ingrese el ID");
         int ID = entrada.nextInt();
 
@@ -141,5 +140,14 @@ public class Catalogo {
             }
         } 
         return false;  
+    }
+    public boolean ingreserCliente(Cliente usario){
+        for (int i = 0; i < listadoClientes.length; i++) {
+            if (listadoClientes[i]== null) {
+                listadoClientes[i] = usario;
+                return true;
+            }
+        }
+        return false;
     }
 }

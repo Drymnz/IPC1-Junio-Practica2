@@ -3,6 +3,9 @@ package src;
 import java.util.Scanner;
 
 public class Star {
+    public Scanner entrada = new Scanner(System.in);
+    public static Catalogo almacen = new Catalogo();
+    
     public static void main(String[] args) {
         Star ejecutar = new Star();
     }
@@ -14,6 +17,12 @@ public class Star {
             System.out.println("ingrese su telefono");
             int telefono = entrada.nextInt();
             returnar = new Cliente(nombre, generarID(nombre,telefono), telefono);
+            if (almacen.ingreserCliente(returnar)) {
+                System.err.println("fue añadido al sistema");
+            } else {
+                System.out.println("no hay espacio");
+                returnar = null;
+            }
         return returnar;
     }
     public static int generarID(String nombre, int telefono){
@@ -26,10 +35,9 @@ public class Star {
     }
 
     public Star (){
-        Scanner entrada = new Scanner(System.in);
         boolean salir = false;
         Cliente usario = null;
-        Catalogo almacen = new Catalogo();
+        
         // bucle para que no se salga facilmente el programa
         while (!salir) {
             System.out.println("Usario <"+nombreUsario(usario)+">");
@@ -48,7 +56,7 @@ public class Star {
                     almacen.alquilar(usario);
                          break;
                     case "2":
-                            devolverPelicula(usario, almacen);
+                        devolverPelicula(usario);
                          break;
                     case "3":
                             usario = registro();
@@ -64,12 +72,12 @@ public class Star {
     }
     public String nombreUsario(Cliente usario){
         if (usario != null) {
-            return usario.nombre;
+            return usario.nombre +" ID:" +usario.ID;
         } else {
             return "No hay usario logiado";
         }
     }
-    public void devolverPelicula (Cliente usario,Catalogo almacen){
+    public void devolverPelicula (Cliente usario){
         if ((usario != null)) {
             if ((usario.getTienePeliculaPrestada())) {
                 // si puede devolver una pelicula
