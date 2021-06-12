@@ -1,10 +1,11 @@
+package src;
 public class Cliente {
     public String nombre ;
     public int ID;
     private int telefono;
     private boolean tienePeliculaPrestada = false; 
 
-    public Cliente () {
+    public Cliente (String nombre , int ID ,int telefono) {
         
     }
 

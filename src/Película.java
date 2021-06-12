@@ -1,3 +1,4 @@
+package src;
 public class Película {
     public int ID;
     public String nombre;
