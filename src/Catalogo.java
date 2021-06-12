@@ -2,22 +2,23 @@ package src;
 
 import java.util.Scanner;
 
-import src.Película;
+import src.Cliente;
+import src.Pelicula;
 
 public class Catalogo {
     public final int CANTIDAD_PELICULAS_DISPONIBLES = 5;
-    public Película[] listadoPeliculas = new Película[CANTIDAD_PELICULAS_DISPONIBLES];
+    public Pelicula[] listadoPeliculas = new Pelicula[CANTIDAD_PELICULAS_DISPONIBLES];
     public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[CANTIDAD_PELICULAS_DISPONIBLES];
 
     public Catalogo () {
         cargarCatalogo();
     }
     public void cargarCatalogo(){
-        listadoPeliculas[0]  = new Película(105, "Guasón", 2019, "Suspenso");
-        listadoPeliculas[1]  = new Película(001, "The Karate Kid", 1984, "Aventura");
-        listadoPeliculas[2]  = new Película(002, "The Karate Kid Part II", 1984, "Aventura");
-        listadoPeliculas[3]  = new Película(003, "The Karate Kid Part III", 1989, "Aventura");
-        listadoPeliculas[4]  = new Película(004, "Fight Club", 1999, "Suspenso");
+        listadoPeliculas[0]  = new Pelicula(105, "Guasón", 2019, "Suspenso");
+        listadoPeliculas[1]  = new Pelicula(001, "The Karate Kid", 1984, "Aventura");
+        listadoPeliculas[2]  = new Pelicula(002, "The Karate Kid Part II", 1984, "Aventura");
+        listadoPeliculas[3]  = new Pelicula(003, "The Karate Kid Part III", 1989, "Aventura");
+        listadoPeliculas[4]  = new Pelicula(004, "Fight Club", 1999, "Suspenso");
     }
     public void mostarCatalogo(){
         for (int i = 0; i < listadoPeliculas.length; i++) {
@@ -44,9 +45,13 @@ public class Catalogo {
     }
     public boolean reservar(Cliente usario,int ID){
         Scanner entrada = new Scanner(System.in);
-        if (existePelicula(ID) && (buscarPelicula(ID).getDisponible())) {
+        Pelicula alguilar = buscarPelicula(ID);
+        if (existePelicula(ID) && (alguilar.getDisponible())) {
             System.out.println("Cuantos dias la queres");
-            int dias = entrada.nextInt();
+            int diasPrestada = entrada.nextInt();
+            prestaPelicula(alguilar, usario, diasPrestada);
+            usario.setTienePeliculaPrestada(true);
+            alguilar.setDisponible(false);
             System.out.println("fue reseravado entregado tu pelicula, disfrutala");
             return true;
         }else{
@@ -55,8 +60,17 @@ public class Catalogo {
         } 
         
     }
-    public Película buscarPelicula(int ID){
-        Película returnar = null;
+    public void prestaPelicula(Pelicula pelicula,Cliente usario, int diasPrestada){
+        for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
+            if (listadoPrestamoPelicula[i]!=null) {
+                listadoPrestamoPelicula[i] = new PrestamoPelicula(pelicula.ID, usario.ID, diasPrestada);
+                i = listadoPrestamoPelicula.length;
+            }
+        }
+    }
+    // buscar pelicual por medio de su Id
+    public Pelicula buscarPelicula(int ID){
+        Pelicula returnar = null;
         for (int i = 0; i < listadoPeliculas.length; i++) {
             if (listadoPeliculas[i].ID == ID) {
                 return listadoPeliculas[i];
