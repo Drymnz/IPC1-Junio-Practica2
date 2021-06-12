@@ -27,6 +27,18 @@ public class ManejoPelicula {
             }
         }
     }
+    public boolean addPelicula(String textoID,String nombre, String textoFecha, String categoria ){
+        for (int i = 0; i < listadoPelicula.length; i++) {
+            if (listadoPelicula[i]== null) {
+                int ID = Integer.parseInt(textoID);
+                int fecha = Integer.parseInt(textoFecha);
+                listadoPelicula[i] = new Pelicula(ID, nombre, fecha, categoria);
+                return true;
+            }
+        }
+        return false;
+    }
+    // mover si esta reservado la pelicula
     public boolean reservar(Cliente usario,int ID){
         Scanner entrada = new Scanner(System.in);
         Pelicula alguilar = bucarPelicula(ID);

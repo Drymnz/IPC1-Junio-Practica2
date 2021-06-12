@@ -16,7 +16,7 @@ public class MenuPrincipal {
             System.out.println("<presione 1> Ver catalogo ");
             System.out.println("<presione 2> Devolver pelicula (NOTA:REQUISITOS TENER UNA PELICULA)");
             System.out.println("<presione 3> Registrase cliente");
-            System.out.println("<presione 4> Busacar cliente");
+            System.out.println("<presione 4> Registrase pelicula");
             System.out.println("<presione 5> Busacar cliente");
             System.out.println("<presione 0> Salir del programa");
             String opcion = entradad.nextLine();
@@ -31,7 +31,7 @@ public class MenuPrincipal {
                         devolverPelciula();
                          break;
                     case "3":
-                        usario = registro();
+                        usario = registroCliente();
                          break;
                     case "4":
                          break;
@@ -41,6 +41,7 @@ public class MenuPrincipal {
                  }  
         }
     }
+    // para el menu devolver pelicula
     public void devolverPelciula(){
         boolean salir = false;
         String opcion = "";
@@ -82,6 +83,7 @@ public class MenuPrincipal {
         } while (salir);
         
     }
+    // para para preguntar cual va alquilar
     public void preguntarCualAlquilarPelicula (){
         Scanner entrada = new Scanner(System.in);
         boolean salir = false;
@@ -100,7 +102,7 @@ public class MenuPrincipal {
                      salir = catalogo.reservar(usario, ID);
                 } else {
                     System.out.println("Registre el cliente porfavor");
-                    usario = registro();
+                    usario = registroCliente();
                 }
             }
         }
@@ -112,7 +114,7 @@ public class MenuPrincipal {
         int ID = entradad.nextInt();
         return manejoClientes.buscarClienteNombreID( nombre , ID);
     }
-    public Cliente registro(){
+    public Cliente registroCliente(){
 
             System.out.println("Ingrese su nombre");
             String nombre = entradad.nextLine();
@@ -120,5 +122,16 @@ public class MenuPrincipal {
             int telefono = entradad.nextInt();
             
         return manejoClientes.registrar(nombre, telefono);
+    }
+    public void registroPelicula (){
+        System.out.println("Ingrese el ID de la pelicula");
+        String ID = entradad.nextLine();
+        System.out.println("Ingrese el nombre de la pelicula");
+        String nombre = entradad.nextLine();
+        System.out.println("Ingrese el año que fue postiada la pelicula");
+        String fecha = entradad.nextLine();
+        System.out.println("Ingrese la categoria o genero de la pelicula");
+        String categoria = entradad.nextLine();
+        
     }
 }
