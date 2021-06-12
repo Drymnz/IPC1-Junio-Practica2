@@ -9,6 +9,7 @@ public class Catalogo {
     public final int CANTIDAD_PELICULAS_DISPONIBLES = 5;
     public Pelicula[] listadoPeliculas = new Pelicula[CANTIDAD_PELICULAS_DISPONIBLES];
     public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[CANTIDAD_PELICULAS_DISPONIBLES];
+    public Cliente[] listadoClientes = new Cliente [20];
 
     public Catalogo () {
         cargarCatalogo();
@@ -49,6 +50,7 @@ public class Catalogo {
         }
 
     }
+   
     public boolean reservar(Cliente usario,int ID){
         Scanner entrada = new Scanner(System.in);
         Pelicula alguilar = buscarPelicula(ID);
@@ -74,6 +76,43 @@ public class Catalogo {
             }
         }
     }
+    public Cliente buscar(){
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Ingrese el nombre");
+        String nombre = entrada.nextLine();
+        entrada.next();
+        System.out.println("Ingrese el ID");
+        int ID = entrada.nextInt();
+
+        Cliente returnar = null;
+        for (int i = 0; i < listadoClientes.length; i++) {
+            if (listadoClientes[i].nombre.equals(nombre) | (listadoClientes[i].ID == ID)) {
+                return listadoClientes[i];
+            }
+        }
+        return returnar;
+    }
+    public Cliente buscarIDPelicuala(int ID) {
+        if ((existePelicula(ID)) | (existeReservacion(ID))) {
+            PrestamoPelicula reservado = buscarPrestamoPelicula(ID);
+           for (int i = 0; i < listadoClientes.length; i++) {
+               if (reservado.IDCliente == listadoClientes[i].ID) {
+                   return listadoClientes[i];
+               }
+           }
+        } else {
+            System.out.println("no existe la pelicula");
+        }
+        return null;
+    }
+    public PrestamoPelicula buscarPrestamoPelicula (int ID){
+        for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
+            if (listadoPrestamoPelicula[i].IDPelicula == ID) {
+                return listadoPrestamoPelicula[i];
+            }
+        }
+        return null;  
+    }
     // buscar pelicual por medio de su Id
     public Pelicula buscarPelicula(int ID){
         Pelicula returnar = null;
@@ -92,5 +131,15 @@ public class Catalogo {
            }
        }
        return false;
+    }
+    public boolean existeReservacion (int ID){
+        if (existePelicula(ID)) {
+            for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
+                if (listadoPrestamoPelicula[i].IDPelicula == ID) {
+                    return true;
+                }
+            }
+        } 
+        return false;  
     }
 }

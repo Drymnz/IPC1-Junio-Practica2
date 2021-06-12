@@ -32,10 +32,12 @@ public class Star {
         Catalogo almacen = new Catalogo();
         // bucle para que no se salga facilmente el programa
         while (!salir) {
-            System.out.println("Hola cliente para poder ver el catalogo presione 1");
-            System.out.println("si desea devolver una pelicula presiones 2 (NOTA:REQUISITOS TENER UNA PELICULA)");
-            System.out.println("registrase presione 3");
-            System.out.println("si desea salir del programa presione 0");
+            System.out.println("Usario <"+nombreUsario(usario)+">");
+            System.out.println("<presione 1> Ver catalogo ");
+            System.out.println("<presione 2> Devolver pelicula (NOTA:REQUISITOS TENER UNA PELICULA)");
+            System.out.println("<presione 3> Registrase cliente");
+            System.out.println("<presione 4> Busacar cliente");
+            System.out.println("<presione 0> Salir del programa");
             String opcion = entrada.nextLine();
                 switch (opcion) {
                     case "0":
@@ -46,23 +48,57 @@ public class Star {
                     almacen.alquilar(usario);
                          break;
                     case "2":
-                            devolverPelicula(usario);
+                            devolverPelicula(usario, almacen);
                          break;
                     case "3":
                             usario = registro();
                          break;
-            
+                    case "4":
+                            usario = almacen.buscar();
+                         break;
                     default:
                          break;
                  }  
         }
        
     }
-    public void devolverPelicula (Cliente usario){
-        if ((usario != null)&& (usario.getTienePeliculaPrestada())) {
-            
+    public String nombreUsario(Cliente usario){
+        if (usario != null) {
+            return usario.nombre;
         } else {
-            System.out.println("Lo sentimos no cumple los requisitos para devolver una pelicula");
+            return "No hay usario logiado";
+        }
+    }
+    public void devolverPelicula (Cliente usario,Catalogo almacen){
+        if ((usario != null)) {
+            if ((usario.getTienePeliculaPrestada())) {
+                // si puede devolver una pelicula
+            } else {
+                System.out.println("El usario no tiene ninguna pelicula");
+            }
+        } else {
+            Scanner entrada = new Scanner(System.in);
+            String opcion = "";
+            while (!(opcion.equals("salir"))) {
+                System.out.println("<Presione 1> Para buscar cliente por medio del ID de la pelicula");
+                System.out.println("<Presione 2> Para buscar cliente en la base de datos");
+                System.out.println("<Escriba salir> Para regresar al menu anterior");
+                opcion = entrada.nextLine();
+                    switch (opcion) {
+                        case "0":
+                            opcion = "salir";
+                            break;
+                        case "1":
+                            System.out.println("ingresse el ID de la pelicula");
+                            usario = almacen.buscarIDPelicuala(entrada.nextInt());
+                            break;
+                        case "2":
+                            almacen.buscar();   
+                            break;                    
+                        default:
+                            break;
+                    }
+            }
         }
     }
    
