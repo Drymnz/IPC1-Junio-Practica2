@@ -29,6 +29,7 @@ public class Star {
         Scanner entrada = new Scanner(System.in);
         boolean salir = false;
         Cliente usario = null;
+        Catalogo almacen = new Catalogo();
         // bucle para que no se salga facilmente el programa
         while (!salir) {
             System.out.println("Hola cliente para poder ver el catalogo presione 1");

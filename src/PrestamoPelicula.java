@@ -1,10 +1,10 @@
 package src;
-public class PrestamoPeliculas {
+public class PrestamoPelicula {
     protected int IDPelicula;
     protected int IDCliente;
     protected int diasPrestada;
     
-    public PrestamoPeliculas(int IDPelicula,int IDCliente ,int diasPrestada){
+    public PrestamoPelicula(int IDPelicula,int IDCliente ,int diasPrestada){
         this.IDPelicula = IDPelicula;
         this.IDCliente = IDCliente;
         this.diasPrestada = diasPrestada;
