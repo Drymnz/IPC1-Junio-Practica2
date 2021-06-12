@@ -6,10 +6,10 @@ public class MenuPrincipal {
     public Scanner entradad = new Scanner(System.in);
     public ManejoCliente manejoClientes = new ManejoCliente();
     public ManejoPelicula catalogo = new ManejoPelicula();
+    public Cliente usario = null;
 
     public MenuPrincipal(){
         boolean salir = false;
-        Cliente usario = null;
         // bucle para que no se salga facilmente el programa
         while (!salir) {
             System.out.println("Usario <"+manejoClientes.informacionCliente(usario)+">");
@@ -24,11 +24,10 @@ public class MenuPrincipal {
                             salir = true;
                          break;
                     case "1":
-                        catalogo.verCatalogo();
-                        preguntarCualAlquilarPelicula(usario);
+                        preguntarCualAlquilarPelicula();
                          break;
                     case "2":
-                        devolverPelciula(usario);
+                        devolverPelciula();
                          break;
                     case "3":
                         usario = registro();
@@ -41,9 +40,8 @@ public class MenuPrincipal {
                  }  
         }
     }
-    public void devolverPelciula(Cliente usario){
-        Scanner entrada = new Scanner(System.in);
-        String entregar = "si";
+    public void devolverPelciula(){
+        boolean salir = false;
         String opcion = "";
         do {
             if ((usario != null)) {
@@ -52,24 +50,25 @@ public class MenuPrincipal {
                     
                 } else {
                     System.out.println("El usario no tiene ninguna pelicula");
-                    entregar = "si";
+                    salir = true;
                 }
             } else {
-                
-                while (!(opcion.equals("salir1"))) {
+                while (!(opcion.equals("salir"))) {
                     System.out.println("<Presione 1> Para buscar cliente por medio del ID de la pelicula");
                     System.out.println("<Presione 2> Para buscar cliente en la base de datos");
-                    System.out.println("<Escriba salir> Para regresar al menu anterior");
-                    opcion = entrada.nextLine();
+                    System.out.println("<Presione 0> Para regresar al menu anterior");
+                    opcion = entradad.nextLine();
                         switch (opcion) {
                             case "0":
                                 opcion = "salir";
-                                entregar = "si";
+                                salir = true;
                                 break;
                             case "1":
                                 System.out.println("ingresse el ID de la pelicula");
-                                opcion = "salir1";
-                                entregar = "no";
+                                int id = entradad.nextInt();
+                                System.out.println(id);
+                                usario = manejoClientes.buscarClienteNombreID("nombre", catalogo.reservoPelicula(id));
+                                opcion = "salir";
                                 break;
                             case "2":
                                 usario = buscarCliente();
@@ -79,13 +78,15 @@ public class MenuPrincipal {
                         }
                 }
             } 
-        } while (entregar.equals("si"));
+        } while (salir);
         
     }
-    public void preguntarCualAlquilarPelicula (Cliente usario){
+    public void preguntarCualAlquilarPelicula (){
         Scanner entrada = new Scanner(System.in);
         boolean salir = false;
         while (!salir) {
+            System.out.println("Usario <"+manejoClientes.informacionCliente(usario)+">");
+            catalogo.verCatalogo();
             System.out.println("¿Cual desea alquilar? escriba su ID (el que le aparece en ID<ID>)");
             System.out.println("para regresar presiones 0");
             String opcion = entrada.nextLine();
@@ -97,7 +98,7 @@ public class MenuPrincipal {
                      int ID = Integer.parseInt(opcion);
                      salir = catalogo.reservar(usario, ID);
                 } else {
-                    System.out.println("Ingrese un cliente");
+                    System.out.println("Registre el cliente porfavor");
                     usario = registro();
                 }
             }

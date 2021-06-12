@@ -3,8 +3,8 @@ package src;
 import java.util.Scanner;
 
 public class ManejoPelicula {
-    public Pelicula[] listadoPelicula = new Pelicula[20];
-    public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[20];
+    public Pelicula[] listadoPelicula = new Pelicula[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
+    public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
 
     public ManejoPelicula  (){
         cargarCatalogo();
@@ -39,20 +39,38 @@ public class ManejoPelicula {
             System.out.println("fue reseravado entregado tu pelicula, disfrutala");
             return true;
         }else{
-            System.out.println("Lo sentimos no esta en este momento");
+            switch ((alguilar == null)? 0:!(alguilar.getDisponible())? 1:(usario.getTienePeliculaPrestada())?2:3) {
+                case 0:
+                System.out.println("lo sentimos la pelicula no esta existe");
+                    break;
+                case 1:
+                    System.out.println("Lo sentimos no esta disponible");
+                        break;
+                case 2:
+                    System.out.println("Lo sentimos no puede tener mas de una pelicula en su poder");
+                        break;
+                default:
+                    break;
+            }
+            
             return false;
         } 
         
     }
-    public boolean addPelicula(Pelicula pelicula){
-        return false;
+  
+    //quien reservo la pelicula 
+    public int reservoPelicula(int ID){
+        for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
+            if ((listadoPrestamoPelicula[i]!= null)&&(listadoPrestamoPelicula[i].IDPelicula == ID)) {
+                return listadoPrestamoPelicula[i].IDCliente;
+            }
+        }
+        return 0;
     }
-    
-    
     public boolean existeReservacion (int ID){
         if (existePelicula(ID)) {
             for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
-                if (listadoPrestamoPelicula[i].IDPelicula == ID) {
+                if ((listadoPrestamoPelicula[i] != null)&&(listadoPrestamoPelicula[i].IDPelicula == ID)) {
                     return true;
                 }
             }
@@ -64,7 +82,7 @@ public class ManejoPelicula {
     public Pelicula bucarPelicula( int ID){
         Pelicula returnar = null;
         for (int i = 0; i < listadoPelicula.length; i++) {
-            if (listadoPelicula[i].ID == ID) {
+            if ((listadoPelicula[i] != null)&&(listadoPelicula[i].ID == ID)) {
                 return listadoPelicula[i];
             }
         }
@@ -73,7 +91,7 @@ public class ManejoPelicula {
     // verificar si existe la pelicula
     public boolean existePelicula(int ID){
         for (int i = 0; i < listadoPelicula.length; i++) {
-            if (ID == listadoPelicula[i].ID) {
+            if ((listadoPelicula[i] != null)&&(ID == listadoPelicula[i].ID)) {
                  return true;
             }
         }
