@@ -3,7 +3,7 @@ package src;
 import java.util.Scanner;
 
 public class Star {
-    public Scanner entrada = new Scanner(System.in);
+    public Scanner entradad = new Scanner(System.in);
     public static Catalogo almacen = new Catalogo();
     
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class Star {
             System.out.println("<presione 3> Registrase cliente");
             System.out.println("<presione 4> Busacar cliente");
             System.out.println("<presione 0> Salir del programa");
-            String opcion = entrada.nextLine();
+            String opcion = entradad.nextLine();
                 switch (opcion) {
                     case "0":
                             salir = true;
