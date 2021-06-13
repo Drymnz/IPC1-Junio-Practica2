@@ -1,7 +1,5 @@
 package src;
 
-import java.util.Scanner;
-
 public class ManejoCliente {
     public Cliente[] listadoCliente = new Cliente[1];
 
