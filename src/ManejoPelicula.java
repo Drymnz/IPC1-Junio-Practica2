@@ -23,47 +23,47 @@ public class ManejoPelicula {
     public void verCatalogo() {
         for (int i = 0; i < listadoPelicula.length; i++) {
             if (listadoPelicula[i] != null) {
-                System.out.println("ID<" + Star.colores(3) + listadoPelicula[i].ID + Star.colores(0)
-                        + ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + listadoPelicula[i].nombre + Star.colores(0)
-                        + "> AÑO <" + Star.colores(3) + listadoPelicula[i].fecha + Star.colores(0) + "> CATEGORIA <"
-                        + Star.colores(3) + listadoPelicula[i].categoria + Star.colores(0) + ">" +"<"+disponible(listadoPelicula[i].disponible)+">");
+                System.out.println("ID<" + Star.colores(3) + listadoPelicula[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + listadoPelicula[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + listadoPelicula[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + listadoPelicula[i].categoria + Star.colores(0) + ">" + "<"+ disponible(listadoPelicula[i].disponible) + ">");
             } else {
                 i = listadoPelicula.length;
             }
         }
     }
-    public String disponible (boolean disponible){
+    // para marcar si esta disponible
+    public String disponible(boolean disponible) {
         if (disponible) {
-            return Star.colores(1)+"DISPONIBLE"+Star.colores(0);
+            return Star.colores(1) + "DISPONIBLE" + Star.colores(0);
         } else {
-            return Star.colores(5)+"NODISPONIBLE"+Star.colores(0);
+            return Star.colores(5) + "NODISPONIBLE" + Star.colores(0);
         }
     }
 
     // añadir peliculas al listado
     public boolean addPelicula(String textoID, String nombre, String textoFecha, String categoria) {
         int ID = Integer.parseInt(textoID);
-        if (existeIDPeliculas(ID)) {
+        if (!(existeIDPeliculas(ID))) {
             for (int i = 0; i < listadoPelicula.length; i++) {
                 if ((listadoPelicula[i] == null)) {
-                    
+
                     int fecha = Integer.parseInt(textoFecha);
                     listadoPelicula[i] = new Pelicula(ID, nombre, fecha, categoria);
                     return true;
                 }
-            } 
+            }
         }
         return false;
     }
+
     // revisar si exite ya este ide en peliculas
-    public boolean existeIDPeliculas(int ID){
+    public boolean existeIDPeliculas(int ID) {
         for (int i = 0; i < listadoPelicula.length; i++) {
-            if ((listadoPelicula[i]!= null)&& (listadoPelicula[i].ID == ID)) {
+            if ((listadoPelicula[i] != null) && (listadoPelicula[i].ID == ID)) {
                 return true;
             }
         }
         return false;
     }
+
     // mover si esta reservado la pelicula
     public boolean reservar(Cliente usario, int ID) {
         Scanner entrada = new Scanner(System.in);
@@ -77,13 +77,13 @@ public class ManejoPelicula {
             usario.setTienePeliculaPrestada(true);
             alguilar.setDisponible(false);
             Star.espacios();
-            System.out.println(Star.colores(1)+"fue reseravado entregado tu pelicula, disfrutala"+Star.colores(0));
+            System.out.println(Star.colores(1) + "fue reseravado entregado tu pelicula, disfrutala" + Star.colores(0));
             return true;
         } else {
             Star.espacios();
             System.out.print(Star.colores(5));
             switch ((alguilar == null) ? 0
-                    : !(alguilar.getDisponible()) ? 1 : (usario.getTienePeliculaPrestada()) ? 2 : 3) {
+                    : !(alguilar.getDisponible()) ? 1 : (!usario.getTienePeliculaPrestada()) ? 2 : 3) {
                 case 0:
                     System.out.println("lo sentimos la pelicula no esta existe");
                     break;
@@ -106,22 +106,11 @@ public class ManejoPelicula {
     // buscar la prestamoPelicula mediante el id de la palicula
     public int reservoPelicula(int ID) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
-            if ((listadoPrestamoPelicula[i] != null) && (listadoPrestamoPelicula[i].IDPelicula == ID)) {
-                return listadoPrestamoPelicula[i].IDCliente;
+            if ((listadoPrestamoPelicula[i] != null) && (listadoPrestamoPelicula[i].getIDPelicula() == ID)) {
+                return listadoPrestamoPelicula[i].getIDCliente();
             }
         }
         return 0;
-    }
-
-    public boolean existeReservacion(int ID) {
-        if (existePelicula(ID)) {
-            for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
-                if ((listadoPrestamoPelicula[i] != null) && (listadoPrestamoPelicula[i].IDPelicula == ID)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     // buscar pelicual por medio de su Id
@@ -135,24 +124,17 @@ public class ManejoPelicula {
         return returnar;
     }
 
-    // verificar si existe la pelicula
-    public boolean existePelicula(int ID) {
-        for (int i = 0; i < listadoPelicula.length; i++) {
-            if ((listadoPelicula[i] != null) && (ID == listadoPelicula[i].ID)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
     // buscar pelicula usando el id del cliente
-    public Pelicula buscarPeliculaIDCliente (int IDCliente){
+    public Pelicula buscarPeliculaIDCliente(int IDCliente) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
-            if ((listadoPrestamoPelicula[i] != null)&&(listadoPrestamoPelicula[i].IDCliente == IDCliente)) {
-                return bucarPelicula(listadoPrestamoPelicula[i].IDPelicula);
+            if ((listadoPrestamoPelicula[i] != null) && (listadoPrestamoPelicula[i].getIDCliente() == IDCliente)) {
+                return bucarPelicula(listadoPrestamoPelicula[i].getIDPelicula());
             }
         }
         return null;
     }
+
     // este metodo realiza el registro de prestamo de peliculas
     public void prestaPelicula(Pelicula pelicula, Cliente usario, int diasPrestada) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {

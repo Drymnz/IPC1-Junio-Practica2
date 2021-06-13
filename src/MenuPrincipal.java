@@ -19,7 +19,8 @@ public class MenuPrincipal {
             System.out.println("<presione 3> Registrase cliente");
             System.out.println("<presione 4> Registrase pelicula");
             System.out.println("<presione 5> Busacar cliente");
-            System.out.println("<presione 6> Cerrar seccion");
+            System.out.println("<presione 6> Reportes");
+            System.out.println("<presione 7> Cerrar seccion");
             System.out.println("<presione 0> Salir del programa");
             Star.espacios();
             String opcion = entrada.nextLine();
@@ -41,6 +42,8 @@ public class MenuPrincipal {
                 case "5":
                     usario = buscarCliente();
                 case "6":
+                    //(new Reporte(catalogo)).
+                case "7":
                     usario = new Cliente("nombre", 0, 0);
                     usario = null;
                     break;
@@ -61,7 +64,8 @@ public class MenuPrincipal {
                     Star.espacios();
                     Pelicula quePoseee = (catalogo.buscarPeliculaIDCliente(usario.ID));
                     System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
-                    System.out.println("¿Devolvio la pelicula? --> <"+ Star.colores(3)+quePoseee.nombre +Star.colores(0)+"> (NOTA: Porfavor escribir SI o NO para responder)");
+                    System.out.println("¿Devolvio la pelicula? --> <" + Star.colores(3) + quePoseee.nombre
+                            + Star.colores(0) + "> (NOTA: Porfavor escribir SI o NO para responder)");
                     Star.espacios();
                     String afirmar = entrada.nextLine();
                     if (afirmar.equalsIgnoreCase("SI")) {
@@ -71,7 +75,7 @@ public class MenuPrincipal {
 
                 } else {
                     Star.espacios();
-                    System.out.println(Star.colores(2)+"El usario no tiene ninguna pelicula"+Star.colores(0));
+                    System.out.println(Star.colores(2) + "El usario no tiene ninguna pelicula" + Star.colores(0));
                     salir = true;
                     Star.espacios();
                 }
@@ -112,21 +116,28 @@ public class MenuPrincipal {
             System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
             catalogo.verCatalogo();
             System.out.println("<Escriba el ID> ¿Cual desea alquilar?(NOTA:el que le aparece en ID<ID>)");
+            System.out.println("<Escriba Ordenar > Pordenar de forma ascendente respecto al nombre");
             System.out.println("<Presione 0 > Para regresar");
             Star.espacios();
             String opcion = entrada.nextLine();
-            if (opcion.equals("0")) {
-                salir = true;
-            } else {
-                if ((usario != null) && !(opcion.trim().equals(""))) {
-                    // convierto el opcion a int revisar por si errores aconsejable usar un try caht
-                    // para capturar el error
-                    int ID = Integer.parseInt(opcion);
-                    salir = catalogo.reservar(usario, ID);
-                } else {
-                    System.out.println("Registre el cliente porfavor");
-                    usario = registroCliente();
-                }
+            switch (opcion) {
+                case "0":
+                    salir = true;
+                    break;
+                case "Ordenar":
+                    catalogo.listadoPelicula = (new Ordenamiento()).ascendenteNombre(catalogo.listadoPelicula);
+                    break;
+                default:
+                    if ((usario != null) && !(opcion.trim().equals(""))) {
+                        // convierto el opcion a int revisar por si errores aconsejable usar un try caht
+                        // para capturar el error
+                        int ID = Integer.parseInt(opcion);
+                        salir = catalogo.reservar(usario, ID);
+                    } else {
+                        System.out.println("Registre el cliente porfavor");
+                        usario = registroCliente();
+                    }
+                    break;
             }
         }
     }
@@ -179,7 +190,7 @@ public class MenuPrincipal {
             Star.espacios();
         } else {
             Star.espacios();
-            System.out.println("Error no se puedo agreagar por espacio");
+            System.out.println("Error no se puedo agreagar (no puede tener el mismo ID que otra)");
             Star.espacios();
         }
     }

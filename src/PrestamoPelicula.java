@@ -1,12 +1,21 @@
 package src;
 public class PrestamoPelicula {
-    protected int IDPelicula;
-    protected int IDCliente;
-    protected int diasPrestada;
+    private int IDPelicula;
+    private int IDCliente;
+    private int diasPrestada;
     
     public PrestamoPelicula(int IDPelicula,int IDCliente ,int diasPrestada){
         this.IDPelicula = IDPelicula;
         this.IDCliente = IDCliente;
         this.diasPrestada = diasPrestada;
+    }
+    public int getIDPelicula(){
+        return IDPelicula;
+    }
+    public int getIDCliente(){
+        return IDCliente;
+    }
+    public int getIdiasPrestada(){
+        return diasPrestada;
     }
 }

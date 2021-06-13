@@ -1,13 +1,12 @@
 package src;
 
 public class Reporte {
-    public Pelicula[] listadoPelicula = new Pelicula[20];
-    public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[20];
+    public ManejoPelicula informacion = null;
 
-    public Reporte(Pelicula[] listadoPelicula,PrestamoPelicula[] listadoPrestamoPelicula){
-        this.listadoPelicula = listadoPelicula;
-        this.listadoPrestamoPelicula = listadoPrestamoPelicula;
+    public Reporte(ManejoPelicula informacion){
+        this.informacion = informacion;
     }
+    
     public void topPeliculasMasPrestadas(){
 
     }
