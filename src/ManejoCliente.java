@@ -3,7 +3,7 @@ package src;
 import java.util.Scanner;
 
 public class ManejoCliente {
-    public Cliente[] listadoCliente = new Cliente[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
+    public Cliente[] listadoCliente = new Cliente[1];
 
     public ManejoCliente() {
 
@@ -12,18 +12,29 @@ public class ManejoCliente {
     // añadir nuevo cliente
     public Cliente registrar(String nombre, int telefono) {
         if (buscarClienteNombreID(nombre, 0) == null) {
-            for (int i = 0; i < listadoCliente.length; i++) {
-                if (listadoCliente[i] == null) {
-                    listadoCliente[i] = new Cliente(nombre, generarID(nombre, telefono), telefono);
-                    return listadoCliente[i];
-                }
-            }
+            do {
+                for (int i = 0; i < listadoCliente.length; i++) {
+                    if (listadoCliente[i] == null) {
+                        listadoCliente[i] = new Cliente(nombre, generarID(nombre, telefono), telefono);
+                        return listadoCliente[i];
+                    }
+                } 
+                aumentarEspacio();
+            } while (true);
         } else {
             Star.espacios();
             System.out.println("lleno el array");
             Star.espacios();
         }
         return null;
+    }
+    private void aumentarEspacio(){
+        int espacioAumentado = listadoCliente.length + 3;
+        Cliente[] nuevoListado = new Cliente[espacioAumentado];
+        for (int i = 0; i < listadoCliente.length; i++) {
+            nuevoListado[i] = listadoCliente[i];
+        }
+        listadoCliente = nuevoListado;
     }
 
     // crear id para clientes
