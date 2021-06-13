@@ -156,7 +156,7 @@ public class MenuPrincipal {
         Star.espacios();
         System.out.println("Ingrese el ID");
         Star.espacios();
-        String ID = entrada.nextInt();
+        String ID = entrada.nextLine();
         Pattern patron = Pattern.compile("[0-9]+");
         Matcher matcher = patron.matcher(ID);
         if (matcher.matches()) {
