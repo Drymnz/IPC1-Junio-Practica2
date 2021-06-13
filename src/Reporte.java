@@ -53,9 +53,9 @@ public class Reporte {
         }
     }
     public void topPeliculasMasPrestadas(){
-
+        informacion.listadoPelicula = (new Ordenamiento()).ascendenteID(informacion.listadoPelicula, true);
     }
-    public void topPeliculasMenosPrestadas(){
+    public void topPeliculasMenosPrestadas(Pelicula[] listadoPelicula){
 
     } 
     public void fueRentada(){
