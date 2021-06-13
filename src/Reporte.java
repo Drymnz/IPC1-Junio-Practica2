@@ -52,14 +52,31 @@ public class Reporte {
             }
         }
     }
-    public void topPeliculasMasPrestadas(){
+    public void topPeliculasMasPrestadasOMenosPrestadas(boolean acendenteODesendente){
         informacion.listadoPrestamoPelicula = (new Ordenamiento()).ordenarAscendente(informacion.listadoPrestamoPelicula);
+        int cont = 0;
+        int [] contador = new int [informacion.listadoPelicula.length];
+        Pelicula [] contadorParalelo = new Pelicula[contador.length];
+        if (informacion.listadoPrestamoPelicula!=null) {
+            for (int i = 0; i < informacion.listadoPrestamoPelicula.length; i++) {
+                for (int j = i+1; j < informacion.listadoPelicula.length-1; j++) {
+                    if (informacion.listadoPrestamoPelicula[i].getIDPelicula() == informacion.listadoPrestamoPelicula[j].getIDPelicula()) {
+                        contador[cont] ++;
+                        contadorParalelo[cont] = informacion.bucarPelicula(informacion.listadoPrestamoPelicula[i].getIDPelicula());
+                        i = j;
+                    }
+                }
+                cont++;
+            }
+            contadorParalelo = (new Ordenamiento()).topPeliculas(contadorParalelo, contador, acendenteODesendente);
+            for (int i = 0; i < contadorParalelo.length; i++) {
+                if (contadorParalelo[i] != null) {
+                    System.out.println("ID<" + Star.colores(3) + contadorParalelo[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + contadorParalelo[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + contadorParalelo[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + contadorParalelo[i].categoria + Star.colores(0) + ">" + "<"+ informacion.disponible(contadorParalelo[i].disponible) + ">");
+                } else {
+                    i = contadorParalelo.length;
+                }
+            }
+        }
     }
-    public void topPeliculasMenosPrestadas(Pelicula[] listadoPelicula){
-
-    } 
-    public void fueRentada(){
-
-    } 
     
 }
