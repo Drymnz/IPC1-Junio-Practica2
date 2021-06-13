@@ -7,17 +7,17 @@ public class ManejoPelicula {
     public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
 
     public ManejoPelicula() {
-        cargarCatalogo();
+       
     }
 
-    // eliminar este metodo solo es prueva si para ver como se ve en pantalla
+    /* eliminar este metodo solo es prueva si para ver como se ve en pantalla
     public void cargarCatalogo() {
         listadoPelicula[0] = new Pelicula(105, "Guasón", 2019, "Suspenso");
         listadoPelicula[1] = new Pelicula(001, "The Karate Kid", 1984, "Aventura");
         listadoPelicula[2] = new Pelicula(002, "The Karate Kid Part II", 1984, "Aventura");
         listadoPelicula[3] = new Pelicula(003, "The Karate Kid Part III", 1989, "Aventura");
         listadoPelicula[4] = new Pelicula(004, "Fight Club", 1999, "Suspenso");
-    }
+    }*/
 
     // mostrar peliculas disponibles
     public void verCatalogo() {
@@ -82,8 +82,7 @@ public class ManejoPelicula {
         } else {
             Star.espacios();
             System.out.print(Star.colores(5));
-            switch ((alguilar == null) ? 0
-                    : !(alguilar.getDisponible()) ? 1 : (!usario.getTienePeliculaPrestada()) ? 2 : 3) {
+            switch ((alguilar == null) ? 0: !(alguilar.getDisponible()) ? 1 : (!usario.getTienePeliculaPrestada()) ? 2 : 3) {
                 case 0:
                     System.out.println("lo sentimos la pelicula no esta existe");
                     break;

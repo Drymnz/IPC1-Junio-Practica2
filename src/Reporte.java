@@ -6,7 +6,9 @@ public class Reporte {
     public Reporte(ManejoPelicula informacion){
         this.informacion = informacion;
     }
-    
+    public void mostar(){
+        
+    }
     public void topPeliculasMasPrestadas(){
 
     }

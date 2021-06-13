@@ -1,6 +1,8 @@
 package src;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MenuPrincipal {
     public Scanner entrada = new Scanner(System.in);
@@ -39,6 +41,7 @@ public class MenuPrincipal {
                     usario = registroCliente();
                     break;
                 case "4":
+                    registroPelicula();
                     break;
                 case "5":
                     usario = buscarCliente();
@@ -122,25 +125,25 @@ public class MenuPrincipal {
             System.out.println("<Escriba Ordenar > Pordenar de forma ascendente respecto al nombre");
             System.out.println("<Presione 0 > Para regresar");
             Star.espacios();
+            // verficador si es numero lo que se ingresa
             String opcion = entrada.nextLine();
-            switch (opcion) {
-                case "0":
-                    salir = true;
-                    break;
-                case "Ordenar":
-                    catalogo.listadoPelicula = (new Ordenamiento()).ascendenteNombre(catalogo.listadoPelicula);
-                    break;
-                default:
-                    if ((usario != null) && !(opcion.trim().equals(""))) {
-                        // convierto el opcion a int revisar por si errores aconsejable usar un try caht
-                        // para capturar el error
-                        int ID = Integer.parseInt(opcion);
-                        salir = catalogo.reservar(usario, ID);
-                    } else {
-                        System.out.println("Registre el cliente porfavor");
-                        usario = registroCliente();
-                    }
-                    break;
+            Pattern patron = Pattern.compile("[0-9]+");
+            Matcher matcher = patron.matcher(opcion);
+            if (opcion.equals("0")) {
+                salir = true;
+            }else if (opcion.equals("Ordenar")) {
+                catalogo.listadoPelicula = (new Ordenamiento()).ascendenteNombre(catalogo.listadoPelicula);
+            }else if (matcher.matches()) {
+                if ((usario != null) && !(opcion.trim().equals(""))) {
+                    // convierto el opcion a int revisar por si errores aconsejable usar un try caht
+                    // para capturar el error
+                    int ID = Integer.parseInt(opcion);
+                    salir = catalogo.reservar(usario, ID);
+                    opcion = "";
+                } else {
+                    System.out.println("Registre el cliente porfavor");
+                    usario = registroCliente();
+                }
             }
         }
     }
@@ -193,7 +196,7 @@ public class MenuPrincipal {
             Star.espacios();
         } else {
             Star.espacios();
-            System.out.println("Error no se puedo agreagar (no puede tener el mismo ID que otra)");
+            System.out.println(Star.colores(5)+"Error no se puedo agreagar (no puede tener el mismo ID que otra)"+Star.colores(0));
             Star.espacios();
         }
     }
