@@ -13,7 +13,7 @@ public class Ordenamiento {
                     seleccion = listadoPelicula[i].nombre;
                 }
                 posicion = i;
-                for (int j = i+1; j < listadoPelicula.length-1; j++) {
+                for (int j = i+1; j < listadoPelicula.length; j++) {
                     if (((listadoPelicula[i]!=null)&&(listadoPelicula[j]!=null))&&(seleccion.compareToIgnoreCase(listadoPelicula[j].nombre)>0)) {
                         selecionPelicula = listadoPelicula[j];
                         seleccion = listadoPelicula[j].nombre;
@@ -39,7 +39,7 @@ public class Ordenamiento {
                     seleccion = listadoPelicula[i].categoria;
                 }
                 posicion = i;
-                for (int j = i+1; j < listadoPelicula.length-1; j++) {
+                for (int j = i+1; j < listadoPelicula.length; j++) {
                     if (((listadoPelicula[i]!=null)&&(listadoPelicula[j]!=null))&&(seleccion.compareToIgnoreCase(listadoPelicula[j].categoria)>0)) {
                         selecionPelicula = listadoPelicula[j];
                         seleccion = listadoPelicula[j].categoria;

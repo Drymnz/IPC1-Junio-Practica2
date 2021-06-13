@@ -46,7 +46,7 @@ public class MenuPrincipal {
                 case "5":
                     usario = buscarCliente();
                 case "6":
-                    //(new Reporte(catalogo)). mostrar los reportes
+                    (new Reporte(catalogo)).mostar();
                 case "7":
                     manejoClientes.mostrarListadoClientes(catalogo);
                 case "8":
