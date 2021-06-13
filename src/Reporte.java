@@ -70,11 +70,13 @@ public class Reporte {
                 for (int j = i+1; j < informacion.listadoPelicula.length-1; j++) {
                     if (((informacion.listadoPrestamoPelicula[i]!=null)&&(informacion.listadoPrestamoPelicula[j]!=null))&&(informacion.listadoPrestamoPelicula[i].getIDPelicula() == informacion.listadoPrestamoPelicula[j].getIDPelicula())) {
                         contador[cont] ++;
-                        contadorParalelo[cont] = informacion.bucarPelicula(informacion.listadoPrestamoPelicula[i].getIDPelicula());
                         i = j;
                     }
                 }
                 cont++;
+                if (informacion.listadoPrestamoPelicula[i]!=null) {
+                    contadorParalelo[i] = informacion.bucarPelicula(informacion.listadoPrestamoPelicula[i].getIDPelicula());                  
+                }
             }
             contadorParalelo = (new Ordenamiento()).topPeliculas(contadorParalelo, contador, acendenteODesendente);
             if (contadorParalelo == null || contadorParalelo[0]==null) {

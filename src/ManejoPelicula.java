@@ -68,10 +68,10 @@ public class ManejoPelicula {
         Pelicula alguilar = bucarPelicula(ID);
         if ((alguilar != null) && (alguilar.getDisponible()) && !(usario.getTienePeliculaPrestada())) {
             Star.espacios();
-            System.out.println("Cuantos dias la quieres");
+            System.out.println("¿Cuantos dias la quieres? (NOTA: por favor solo numero)");
             Star.espacios();
             int diasPrestada = new Scanner(System.in).nextInt();
-            prestaPelicula(alguilar, usario, diasPrestada);
+            addReservacionPelicula(alguilar, usario, diasPrestada);
             usario.setTienePeliculaPrestada(true);
             alguilar.setDisponible(false);
             Star.espacios();
@@ -99,7 +99,6 @@ public class ManejoPelicula {
         }
 
     }
-
     // buscar la prestamoPelicula mediante el id de la palicula
     public int reservoPelicula(int ID) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
@@ -133,7 +132,7 @@ public class ManejoPelicula {
     }
 
     // este metodo realiza el registro de prestamo de peliculas
-    public void prestaPelicula(Pelicula pelicula, Cliente usario, int diasPrestada) {
+    public void addReservacionPelicula(Pelicula pelicula, Cliente usario, int diasPrestada) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
             if (listadoPrestamoPelicula[i] == null) {
                 listadoPrestamoPelicula[i] = new PrestamoPelicula(pelicula.ID, usario.getID(), diasPrestada);
