@@ -55,7 +55,7 @@ public class ManejoCliente {
     public Cliente buscarClienteNombreID(String nombre, int ID) {
         Cliente returnar = null;
         for (int i = 0; i < listadoCliente.length; i++) {
-            if ((listadoCliente[i] != null) && (((listadoCliente[i].getID() == ID)) || (listadoCliente[i].nombre.equals(nombre)))) {
+            if ((listadoCliente[i] != null) && (((listadoCliente[i].getID() == ID)) | (listadoCliente[i].nombre.equals(nombre)))) {
                 return listadoCliente[i];
             }
         }

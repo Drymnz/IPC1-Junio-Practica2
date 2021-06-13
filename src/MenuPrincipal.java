@@ -82,7 +82,7 @@ public class MenuPrincipal {
                 } else {
                     Star.espacios();
                     System.out.println(Star.colores(2) + "El usario no tiene ninguna pelicula" + Star.colores(0));
-                    salir = true;
+                    salir = false;
                     Star.espacios();
                 }
             } else {
@@ -156,8 +156,14 @@ public class MenuPrincipal {
         Star.espacios();
         System.out.println("Ingrese el ID");
         Star.espacios();
-        int ID = entrada.nextInt();
-        return manejoClientes.buscarClienteNombreID(nombre, ID);
+        String ID = entrada.nextInt();
+        Pattern patron = Pattern.compile("[0-9]+");
+        Matcher matcher = patron.matcher(ID);
+        if (matcher.matches()) {
+            int dar = Integer.parseInt(ID);
+            return manejoClientes.buscarClienteNombreID(nombre, dar);
+        }
+        return null;
     }
 
     public Cliente registroCliente() {
