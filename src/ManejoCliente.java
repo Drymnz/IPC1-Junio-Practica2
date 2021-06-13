@@ -19,7 +19,9 @@ public class ManejoCliente {
                 }
             }
         } else {
+            Star.espacios();
             System.out.println("lleno el array");
+            Star.espacios();
         }
         return null;
     }
@@ -53,9 +55,9 @@ public class ManejoCliente {
 
     public String informacionCliente(Cliente usario) {
         if (usario != null) {
-            return usario.nombre + " ID:" + usario.ID;
+            return " "+Star.colores(3)+usario.nombre + Star.colores(0)+" ID:" +Star.colores(3)+ usario.ID+Star.colores(0)+" ";
         } else {
-            return "No hay usario logiado";
+            return Star.colores(3)+"No hay usario logiado"+ Star.colores(0);
         }
     }
 

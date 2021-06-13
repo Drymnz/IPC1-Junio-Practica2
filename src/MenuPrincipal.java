@@ -3,7 +3,7 @@ package src;
 import java.util.Scanner;
 
 public class MenuPrincipal {
-    public Scanner entradad = new Scanner(System.in);
+    public Scanner entrada = new Scanner(System.in);
     public ManejoCliente manejoClientes = new ManejoCliente();
     public ManejoPelicula catalogo = new ManejoPelicula();
     public Cliente usario = null;
@@ -12,6 +12,7 @@ public class MenuPrincipal {
         boolean salir = false;
         // bucle para que no se salga facilmente el programa
         while (!salir) {
+            Star.espacios();
             System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
             System.out.println("<presione 1> Ver catalogo ");
             System.out.println("<presione 2> Devolver pelicula (NOTA:REQUISITOS TENER UNA PELICULA)");
@@ -20,7 +21,8 @@ public class MenuPrincipal {
             System.out.println("<presione 5> Busacar cliente");
             System.out.println("<presione 6> Cerrar seccion");
             System.out.println("<presione 0> Salir del programa");
-            String opcion = entradad.nextLine();
+            Star.espacios();
+            String opcion = entrada.nextLine();
             switch (opcion) {
                 case "0":
                     salir = true;
@@ -50,33 +52,50 @@ public class MenuPrincipal {
     public void devolverPelciula() {
         boolean salir = false;
         String opcion = "";
+        Star.espacios();
+
         do {
             if ((usario != null)) {
                 if ((usario.getTienePeliculaPrestada())) {
                     // si puede devolver una pelicula
+                    Star.espacios();
+                    Pelicula quePoseee = (catalogo.buscarPeliculaIDCliente(usario.ID));
+                    System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
+                    System.out.println("¿Devolvio la pelicula? --> <"+ Star.colores(3)+quePoseee.nombre +Star.colores(0)+"> (NOTA: Porfavor escribir SI o NO para responder)");
+                    Star.espacios();
+                    String afirmar = entrada.nextLine();
+                    if (afirmar.equalsIgnoreCase("SI")) {
+                        usario.setTienePeliculaPrestada(false);
+                        quePoseee.setDisponible(true);
+                    }
 
                 } else {
-                    System.out.println("El usario no tiene ninguna pelicula");
+                    Star.espacios();
+                    System.out.println(Star.colores(2)+"El usario no tiene ninguna pelicula"+Star.colores(0));
                     salir = true;
+                    Star.espacios();
                 }
             } else {
-                while (!(opcion.equalsIgnoreCase("SALIR"))) {
+                while (!(opcion.equals("SALIR"))) {
                     System.out.println("<Presione 1> Para buscar cliente por medio del ID de la pelicula");
                     System.out.println("<Presione 2> Para buscar cliente en la base de datos");
                     System.out.println("<Escriba SALIR> Para regresar al menu anterior");
-                    opcion = entradad.nextLine();
+                    Star.espacios();
+                    opcion = entrada.nextLine();
                     switch (opcion) {
+                        case "SALIR":
+                            salir = false;
+                            break;
                         case "1":
+                            Star.espacios();
                             System.out.println("ingresse el ID de la pelicula");
+                            Star.espacios();
                             usario = manejoClientes.buscarClienteNombreID("",
-                                    catalogo.reservoPelicula(entradad.nextInt()));
+                                    catalogo.reservoPelicula(entrada.nextInt()));
                             opcion = "SALIR";
                             break;
                         case "2":
                             usario = buscarCliente();
-                            break;
-                        case "SALIR":
-                            salir = false;
                             break;
                     }
                 }
@@ -87,18 +106,19 @@ public class MenuPrincipal {
 
     // para para preguntar cual va alquilar
     public void preguntarCualAlquilarPelicula() {
-        Scanner entrada = new Scanner(System.in);
         boolean salir = false;
         while (!salir) {
+            Star.espacios();
             System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
             catalogo.verCatalogo();
-            System.out.println("¿Cual desea alquilar? escriba su ID (el que le aparece en ID<ID>)");
-            System.out.println("para regresar presiones 0");
+            System.out.println("<Escriba el ID> ¿Cual desea alquilar?(NOTA:el que le aparece en ID<ID>)");
+            System.out.println("<Presione 0 > Para regresar");
+            Star.espacios();
             String opcion = entrada.nextLine();
             if (opcion.equals("0")) {
                 salir = true;
             } else {
-                if (usario != null) {
+                if ((usario != null) && !(opcion.trim().equals(""))) {
                     // convierto el opcion a int revisar por si errores aconsejable usar un try caht
                     // para capturar el error
                     int ID = Integer.parseInt(opcion);
@@ -112,32 +132,55 @@ public class MenuPrincipal {
     }
 
     public Cliente buscarCliente() {
+        Star.espacios();
         System.out.println("Ingrese el nombre");
-        String nombre = entradad.nextLine();
+        Star.espacios();
+        String nombre = entrada.nextLine();
+        Star.espacios();
         System.out.println("Ingrese el ID");
-        int ID = entradad.nextInt();
+        Star.espacios();
+        int ID = entrada.nextInt();
         return manejoClientes.buscarClienteNombreID(nombre, ID);
     }
 
     public Cliente registroCliente() {
-
+        Star.espacios();
         System.out.println("Ingrese su nombre");
-        String nombre = entradad.nextLine();
+        Star.espacios();
+        String nombre = entrada.nextLine();
+        Star.espacios();
         System.out.println("ingrese su telefono");
-        int telefono = entradad.nextInt();
+        Star.espacios();
+        int telefono = entrada.nextInt();
 
         return manejoClientes.registrar(nombre, telefono);
     }
 
     public void registroPelicula() {
-        System.out.println("Ingrese el ID de la pelicula");
-        String ID = entradad.nextLine();
+        Star.espacios();
+        System.out.println("Ingrese el ID de la pelicula (NOTA: SOLO NUMERO PORFAVOR)");
+        Star.espacios();
+        String ID = entrada.nextLine();
+        Star.espacios();
         System.out.println("Ingrese el nombre de la pelicula");
-        String nombre = entradad.nextLine();
-        System.out.println("Ingrese el año que fue postiada la pelicula");
-        String fecha = entradad.nextLine();
+        Star.espacios();
+        String nombre = entrada.nextLine();
+        Star.espacios();
+        System.out.println("Ingrese el año que fue postiada la pelicula (NOTA: SOLO NUMERO PORFAVOR)");
+        Star.espacios();
+        String fecha = entrada.nextLine();
+        Star.espacios();
         System.out.println("Ingrese la categoria o genero de la pelicula");
-        String categoria = entradad.nextLine();
-
+        Star.espacios();
+        String categoria = entrada.nextLine();
+        if (catalogo.addPelicula(ID, nombre, fecha, categoria)) {
+            Star.espacios();
+            System.out.println("Fue agregado la pelicula");
+            Star.espacios();
+        } else {
+            Star.espacios();
+            System.out.println("Error no se puedo agreagar por espacio");
+            Star.espacios();
+        }
     }
 }

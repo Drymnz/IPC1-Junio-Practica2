@@ -22,9 +22,17 @@ public class Star {
                                 return ("\033[34m");// colorAzul
                         case 4:
                                 return ("\033[33m");// colorAmarillo
+                        case 5:
+                                return ("\033[31m");// colorRojo
 
                         default:
                                 return "";
                 }
+        }
+        public static void espacios(){
+                for (int i = 0; i < 100; i++) {
+                        System.out.print(colores(4)+"#"+colores(0));
+                }
+                System.out.println("");
         }
 }
