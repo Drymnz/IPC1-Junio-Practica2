@@ -65,13 +65,12 @@ public class ManejoPelicula {
 
     // mover si esta reservado la pelicula
     public boolean reservar(Cliente usario, int ID) {
-        Scanner entrada = new Scanner(System.in);
         Pelicula alguilar = bucarPelicula(ID);
         if ((alguilar != null) && (alguilar.getDisponible()) && !(usario.getTienePeliculaPrestada())) {
             Star.espacios();
             System.out.println("Cuantos dias la quieres");
             Star.espacios();
-            int diasPrestada = entrada.nextInt();
+            int diasPrestada = new Scanner(System.in).nextInt();
             prestaPelicula(alguilar, usario, diasPrestada);
             usario.setTienePeliculaPrestada(true);
             alguilar.setDisponible(false);
