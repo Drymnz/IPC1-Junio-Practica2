@@ -139,7 +139,7 @@ public class ManejoPelicula {
     public void prestaPelicula(Pelicula pelicula, Cliente usario, int diasPrestada) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
             if (listadoPrestamoPelicula[i] == null) {
-                listadoPrestamoPelicula[i] = new PrestamoPelicula(pelicula.ID, usario.ID, diasPrestada);
+                listadoPrestamoPelicula[i] = new PrestamoPelicula(pelicula.ID, usario.getID(), diasPrestada);
                 i = listadoPrestamoPelicula.length;
             }
         }

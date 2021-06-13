@@ -20,7 +20,8 @@ public class MenuPrincipal {
             System.out.println("<presione 4> Registrase pelicula");
             System.out.println("<presione 5> Busacar cliente");
             System.out.println("<presione 6> Reportes");
-            System.out.println("<presione 7> Cerrar seccion");
+            System.out.println("<presione 7> Listado de clientes");
+            System.out.println("<presione 8> Cerrar seccion");
             System.out.println("<presione 0> Salir del programa");
             Star.espacios();
             String opcion = entrada.nextLine();
@@ -42,8 +43,10 @@ public class MenuPrincipal {
                 case "5":
                     usario = buscarCliente();
                 case "6":
-                    //(new Reporte(catalogo)).
+                    //(new Reporte(catalogo)). mostrar los reportes
                 case "7":
+                    manejoClientes.mostrarListadoClientes(catalogo);
+                case "8":
                     usario = new Cliente("nombre", 0, 0);
                     usario = null;
                     break;
@@ -62,7 +65,7 @@ public class MenuPrincipal {
                 if ((usario.getTienePeliculaPrestada())) {
                     // si puede devolver una pelicula
                     Star.espacios();
-                    Pelicula quePoseee = (catalogo.buscarPeliculaIDCliente(usario.ID));
+                    Pelicula quePoseee = (catalogo.buscarPeliculaIDCliente(usario.getID()));
                     System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
                     System.out.println("¿Devolvio la pelicula? --> <" + Star.colores(3) + quePoseee.nombre
                             + Star.colores(0) + "> (NOTA: Porfavor escribir SI o NO para responder)");

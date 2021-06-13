@@ -1,7 +1,7 @@
 package src;
 public class Cliente {
     public String nombre ;
-    public int ID;
+    private int ID;
     private int telefono;
     private boolean tienePeliculaPrestada = false; 
 
@@ -17,5 +17,11 @@ public class Cliente {
 
     public boolean getTienePeliculaPrestada (){
         return tienePeliculaPrestada;
+    }
+    public int getID(){
+        return ID;
+    }
+    public int gettelefono(){
+        return telefono;
     }
 }
