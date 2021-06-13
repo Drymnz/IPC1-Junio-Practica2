@@ -168,9 +168,15 @@ public class MenuPrincipal {
         Star.espacios();
         System.out.println("ingrese su telefono");
         Star.espacios();
-        int telefono = entrada.nextInt();
-
-        return manejoClientes.registrar(nombre, telefono);
+        String telefono = entrada.nextLine();
+        Pattern patron = Pattern.compile("[0-9]+");
+        Matcher matcherFecha = patron.matcher(telefono);
+        if (matcherFecha.matches()) {
+            int telefono1 = Integer.parseInt(telefono);
+            return manejoClientes.registrar(nombre, telefono1);
+        } else {
+            return null;
+        }
     }
 
     public void registroPelicula() {
@@ -190,7 +196,10 @@ public class MenuPrincipal {
         System.out.println("Ingrese la categoria o genero de la pelicula");
         Star.espacios();
         String categoria = entrada.nextLine();
-        if (catalogo.addPelicula(ID, nombre, fecha, categoria)) {
+        Pattern patron = Pattern.compile("[0-9]+");
+        Matcher matcherFecha = patron.matcher(fecha);
+        Matcher matcherID = patron.matcher(ID);
+        if (((matcherFecha.matches())&&(matcherID.matches()))&&(catalogo.addPelicula(ID, nombre, fecha, categoria))) {
             Star.espacios();
             System.out.println("Fue agregado la pelicula");
             Star.espacios();
