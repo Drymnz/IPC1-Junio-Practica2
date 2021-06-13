@@ -65,17 +65,18 @@ public class ManejoCliente {
         System.out.println("El listado de cliente es :");
         for (int i = 0; i < listadoCliente.length; i++) {
             if (listadoCliente[i]!=null) {
-                System.out.println("ID < "+listadoCliente[i].getID()+" > Nombre < "+listadoCliente[i].nombre+" > Telefono < "+listadoCliente[i].gettelefono()+" > Tiene pelicula < "+tienePelicula(listadoCliente[i],catalogo)+" >");
+                System.out.println("ID < "+Star.colores(4)+listadoCliente[i].getID()+Star.colores(0)+" > Nombre < "+Star.colores(4)+listadoCliente[i].nombre+Star.colores(0)+" > Telefono < "+Star.colores(4)+listadoCliente[i].gettelefono()+Star.colores(0)+" > Tiene pelicula < "+tienePelicula(listadoCliente[i],catalogo)+" >");
             }   
         }
+        System.out.println("");
         Star.espacios();
     }
     // metodo que escribe si tiene pelicula, y si tiene escribir cual
     public String tienePelicula (Cliente usario,ManejoPelicula catalogo){
         if (usario.getTienePeliculaPrestada()) {
-            return (catalogo.buscarPeliculaIDCliente(usario.getID())).nombre;
+            return Star.colores(3)+(catalogo.buscarPeliculaIDCliente(usario.getID())).nombre+Star.colores(0);
         }else{
-            return "No tiene ninguna";
+            return Star.colores(1)+"No tiene ninguna"+Star.colores(0);
         }
     }
 
