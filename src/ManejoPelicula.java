@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class ManejoPelicula {
     public Pelicula[] listadoPelicula = new Pelicula[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
     public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
-
     public ManejoPelicula() {
        
     }
