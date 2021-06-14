@@ -16,15 +16,15 @@ public class MenuPrincipal {
         while (!salir) {
             Star.espacios();
             System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
-            System.out.println("<presione 1> Ver catalogo ");
-            System.out.println("<presione 2> Devolver pelicula (NOTA:REQUISITOS TENER UNA PELICULA)");
-            System.out.println("<presione 3> Registrase cliente");
-            System.out.println("<presione 4> Registrase pelicula");
-            System.out.println("<presione 5> Busacar cliente");
-            System.out.println("<presione 6> Reportes");
-            System.out.println("<presione 7> Listado de clientes");
-            System.out.println("<presione 8> Cerrar seccion");
-            System.out.println("<presione 0> Salir del programa");
+            System.out.println("<"+Star.colores(2)+"presione 1"+Star.colores(0)+"> Ver catalogo ");
+            System.out.println("<"+Star.colores(2)+"presione 2"+Star.colores(0)+"> Devolver pelicula (NOTA:REQUISITOS TENER UNA PELICULA)");
+            System.out.println("<"+Star.colores(4)+"presione 3"+Star.colores(0)+"> Registrase cliente");
+            System.out.println("<"+Star.colores(2)+"presione 4"+Star.colores(0)+"> Registrase pelicula");
+            System.out.println("<"+Star.colores(4)+"presione 5"+Star.colores(0)+"> Busacar cliente");
+            System.out.println("<"+Star.colores(2)+"presione 6"+Star.colores(0)+"> Reportes");
+            System.out.println("<"+Star.colores(4)+"presione 7"+Star.colores(0)+"> Listado de clientes");
+            System.out.println("<"+Star.colores(2)+"presione 8"+Star.colores(0)+"> Cerrar seccion");
+            System.out.println("<"+Star.colores(4)+"presione 0"+Star.colores(0)+"> Salir del programa");
             Star.espacios();
             String opcion = entrada.nextLine();
             switch (opcion) {
@@ -92,16 +92,17 @@ public class MenuPrincipal {
                     Star.espacios();
                 }
             } else {
-                while (!(opcion.equalsIgnoreCase("SALIR"))) {
+                boolean regresar = false;
+                while (!(regresar)) {
                     System.out.println("<Presione 1> Para buscar cliente por medio del ID de la pelicula");
                     System.out.println("<Presione 2> Para buscar cliente en la base de datos");
-                    System.out.println("<Escriba SALIR> Para regresar al menu anterior");
+                    System.out.println("<Presione 0> Para regresar al menu anterior");
                     Star.espacios();
                     opcion = (new Scanner(System.in)).nextLine();
                     Star.espacios();
                     switch (opcion) {
-                        case "SALIR":
-                            salir = false;
+                        case "0":
+                            regresar = true;
                             break;
                         case "1":
                             Star.espacios();
@@ -110,13 +111,13 @@ public class MenuPrincipal {
                             usario = manejoClientes.buscarClienteNombreID("",
                                     catalogo.reservoPelicula(entrada.nextInt()));
                                     if (usario != null) {
-                                        opcion = "SALIR";
+                                        regresar = true;
                                     }
                             break;
                         case "2":
                             usario = buscarCliente();
                             if (usario != null) {
-                                opcion = "SALIR";
+                                regresar = true;
                             }
                             break;
                     }
@@ -134,7 +135,10 @@ public class MenuPrincipal {
             System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
             catalogo.verCatalogo();
             System.out.println("<Escriba el ID> ¿Cual desea alquilar?(NOTA:el que le aparece en ID<ID>)");
-            System.out.println("<Escriba Ordenar > Pordenar de forma ascendente respecto al nombre");
+            System.out.println("<Escriba Ordenar1 > Pordenar de forma ascendente respecto al nombre");
+            System.out.println("<Escriba Ordenar2 > Pordenar de forma ascendente respecto al categorias");
+            System.out.println("<Escriba Ordenar3 > Pordenar de forma ascendente respecto al ID");
+            System.out.println("<Escriba Ordenar4 > Pordenar de forma descendente respecto al ID");
             System.out.println("<Presione 0 > Para regresar");
             Star.espacios();
             // verficador si es numero lo que se ingresa
@@ -143,9 +147,20 @@ public class MenuPrincipal {
             Matcher matcher = patron.matcher(opcion);
             if (opcion.equals("0")) {
                 salir = true;
-            }else if (opcion.equals("Ordenar")) {
+            }
+            else if (opcion.equals("Ordenar1")) {
                 catalogo.listadoPelicula = (new Ordenamiento()).ascendenteNombre(catalogo.listadoPelicula);
-            }else if (matcher.matches()) {
+            }
+            else if (opcion.equals("Ordenar2")) {
+                catalogo.listadoPelicula = (new Ordenamiento()).ascendenteCategorias(catalogo.listadoPelicula);
+            }
+            else if (opcion.equals("Ordenar3")) {
+                catalogo.listadoPelicula = (new Ordenamiento()).ascendenteIDOdesendente(catalogo.listadoPelicula,true);
+            }
+            else if (opcion.equals("Ordenar4")) {
+                catalogo.listadoPelicula = (new Ordenamiento()).ascendenteIDOdesendente(catalogo.listadoPelicula,false);
+            }
+            else if (matcher.matches()) {
                 if ((usario != null) && !(opcion.trim().equals(""))) {
                     int ID = Integer.parseInt(opcion);
                     salir = catalogo.reservar(usario, ID);
@@ -218,7 +233,7 @@ public class MenuPrincipal {
         Matcher matcherID = patron.matcher(ID);
         if (((matcherFecha.matches())&&(matcherID.matches()))&&(catalogo.addPelicula(ID, nombre, fecha, categoria))) {
             Star.espacios();
-            System.out.println("Fue agregado la pelicula");
+            System.out.println(Star.colores(1)+"Fue agregado la pelicula"+Star.colores(0));
             Star.espacios();
         } else {
             Star.espacios();
