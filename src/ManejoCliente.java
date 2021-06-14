@@ -68,7 +68,7 @@ public class ManejoCliente {
         if (usario != null) {
             return " "+Star.colores(3)+usario.nombre + Star.colores(0)+" ID:" +Star.colores(3)+ usario.getID()+Star.colores(0)+" "+mostarSiPoseeUnaPelicula(usario);
         } else {
-            return Star.colores(3)+"No hay usario logiado"+ Star.colores(0);
+            return Star.colores(3)+"No hay usuario logueado"+ Star.colores(0);
         }
     }
     public String mostarSiPoseeUnaPelicula(Cliente usario){

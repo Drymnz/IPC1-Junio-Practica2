@@ -15,16 +15,16 @@ public class MenuPrincipal {
         // bucle para que no se salga facilmente el programa
         while (!salir) {
             Star.espacios();
-            System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
-            System.out.println("<"+Star.colores(2)+"presione 1"+Star.colores(0)+"> Ver catalogo ");
-            System.out.println("<"+Star.colores(2)+"presione 2"+Star.colores(0)+"> Devolver pelicula (NOTA:REQUISITOS TENER UNA PELICULA)");
-            System.out.println("<"+Star.colores(4)+"presione 3"+Star.colores(0)+"> Registrase cliente");
-            System.out.println("<"+Star.colores(2)+"presione 4"+Star.colores(0)+"> Registrase pelicula");
-            System.out.println("<"+Star.colores(4)+"presione 5"+Star.colores(0)+"> Busacar cliente");
-            System.out.println("<"+Star.colores(2)+"presione 6"+Star.colores(0)+"> Reportes");
-            System.out.println("<"+Star.colores(4)+"presione 7"+Star.colores(0)+"> Listado de clientes");
-            System.out.println("<"+Star.colores(2)+"presione 8"+Star.colores(0)+"> Cerrar seccion");
-            System.out.println("<"+Star.colores(4)+"presione 0"+Star.colores(0)+"> Salir del programa");
+            System.out.println("Usuario <" + manejoClientes.informacionCliente(usario) + ">");
+            System.out.println("<"+Star.colores(2)+"presione 1"+Star.colores(0)+"> Ver catalogo. ");
+            System.out.println("<"+Star.colores(2)+"presione 2"+Star.colores(0)+"> Devolver pelicula. (NOTA:REQUIERE QUE EL USUARIO TENGA UNA PELICULA)");
+            System.out.println("<"+Star.colores(4)+"presione 3"+Star.colores(0)+"> Registrar cliente.");
+            System.out.println("<"+Star.colores(2)+"presione 4"+Star.colores(0)+"> Crear nuevas películas.");
+            System.out.println("<"+Star.colores(4)+"presione 5"+Star.colores(0)+"> Busacar cliente.");
+            System.out.println("<"+Star.colores(2)+"presione 6"+Star.colores(0)+"> Reportes.");
+            System.out.println("<"+Star.colores(4)+"presione 7"+Star.colores(0)+"> Listado de clientes.");
+            System.out.println("<"+Star.colores(2)+"presione 8"+Star.colores(0)+"> Cerrar sesion.");
+            System.out.println("<"+Star.colores(4)+"presione 0"+Star.colores(0)+"> Salir del programa.");
             Star.espacios();
             String opcion = entrada.nextLine();
             switch (opcion) {
@@ -72,7 +72,7 @@ public class MenuPrincipal {
                 if ((usario.getTienePeliculaPrestada())&&(quePoseee!=null)) {
                     // si puede devolver una pelicula
                     Star.espacios();
-                    System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
+                    System.out.println("Usuario <" + manejoClientes.informacionCliente(usario) + ">");
                     System.out.println("¿Devolvio la pelicula? --> <" + Star.colores(3) + quePoseee.nombre
                             + Star.colores(0) + "> (NOTA: Porfavor escribir SI o NO para responder)");
                     Star.espacios();
@@ -82,6 +82,7 @@ public class MenuPrincipal {
                             usario.setTienePeliculaPrestada(false);
                             quePoseee.setDisponible(true);
                         } while (!((!usario.getTienePeliculaPrestada())&&(quePoseee.disponible)));
+                        salir = false;
                         Star.espacios();
                         System.out.println(Star.colores(1)+"Fue devuelta la pelicula"+Star.colores(0));
                     }else {
@@ -89,7 +90,7 @@ public class MenuPrincipal {
                     }
                 } else {
                     Star.espacios();
-                    System.out.println(Star.colores(2) + "El usario no tiene ninguna pelicula" + Star.colores(0));
+                    System.out.println(Star.colores(2) + "El usuario no tiene ninguna pelicula" + Star.colores(0));
                     salir = false;
                     Star.espacios();
                 }
@@ -135,7 +136,7 @@ public class MenuPrincipal {
         boolean salir = false;
         while (!salir) {
             Star.espacios();
-            System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
+            System.out.println("Usuario <" + manejoClientes.informacionCliente(usario) + ">");
             catalogo.verCatalogo();
             System.out.println("<"+Star.colores(4)+"Escriba el ID"+Star.colores(0)+"> ¿Cual desea alquilar?(NOTA:el que le aparece en ID<ID>)");
             System.out.println("<"+Star.colores(2)+"Escriba Ordenar1 "+Star.colores(0)+"> Pordenar de forma ascendente respecto al nombre");
@@ -170,7 +171,7 @@ public class MenuPrincipal {
                     opcion = "";
                 } else {
                     Star.espacios();
-                    System.out.println("Registre al usario");
+                    System.out.println("Registre al usuario");
                     usario = registroCliente();
                 }
             }
@@ -201,7 +202,7 @@ public class MenuPrincipal {
         Star.espacios();
         String nombre = entrada.nextLine();
         Star.espacios();
-        System.out.println("ingrese su telefono");
+        System.out.println("ingrese su telefono(NOTA: solo numeros)");
         Star.espacios();
         String telefono = entrada.nextLine();
         Pattern patron = Pattern.compile("[0-9]+");
@@ -228,7 +229,7 @@ public class MenuPrincipal {
         Star.espacios();
         String fecha = entrada.nextLine();
         Star.espacios();
-        System.out.println("Ingrese la categoria o genero de la pelicula");
+        System.out.println("Ingrese una categoria o genero de la pelicula");
         Star.espacios();
         String categoria = entrada.nextLine();
         Pattern patron = Pattern.compile("[0-9]+");
