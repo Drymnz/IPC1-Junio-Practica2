@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: Benjamín de Jesús Pérez Aguilar - 201831504
+main-Class: src.Star
+X-COMMENT: El programa esta orientado en terminal
+
