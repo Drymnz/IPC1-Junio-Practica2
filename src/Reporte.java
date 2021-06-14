@@ -61,16 +61,22 @@ public class Reporte {
         }
     }
     public void topPeliculasMasPrestadasOMenosPrestadas(boolean acendenteODesendente){
-        informacion.listadoPrestamoPelicula = (new Ordenamiento()).ordenarAscendente(informacion.listadoPrestamoPelicula);
-        for (int i = 0; i < informacion.listadoPrestamoPelicula.length; i++) {
-            if (informacion.listadoPrestamoPelicula[i]!=null) {
-                System.out.println(informacion.listadoPrestamoPelicula[i].getIDPelicula());
-            }
-        }
+        informacion.listadoPrestamoPelicula = (new Ordenamiento()).ordenarAscendente(informacion.listadoPrestamoPelicula); // si lo ordena bien
         int cont = 0;
         int [] contador = new int [informacion.listadoPrestamoPelicula.length];
         Pelicula [] contadorParalelo = new Pelicula[informacion.listadoPrestamoPelicula.length];
         if (informacion.listadoPrestamoPelicula!=null) {
+            for (int i = 0; i < informacion.listadoPelicula.length; i++) {
+                for (int j = 0; j < contadorParalelo.length; j++) {// j sera pra prestamos peliculas
+                    if ((informacion.listadoPrestamoPelicula[j]!=null)&&(informacion.listadoPelicula[i]!=null) &&(informacion.listadoPelicula[i].ID == informacion.listadoPrestamoPelicula[j].getIDPelicula())) {
+                        contador[cont] ++;
+                    }
+                }
+            }
+
+
+
+
             for (int i = 0; i < contador.length; i++) {
                     if (((informacion.listadoPrestamoPelicula[i]!=null)&&(informacion.listadoPrestamoPelicula[(i+1)]!=null))&&(informacion.listadoPrestamoPelicula[i].getIDPelicula() == informacion.listadoPrestamoPelicula[(i+1)].getIDPelicula())) {
                         contador[cont] ++;
