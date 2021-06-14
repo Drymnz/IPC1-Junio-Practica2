@@ -136,7 +136,7 @@ public class ManejoPelicula {
     // buscar pelicula usando el id del cliente
     public Pelicula buscarPeliculaIDCliente(int IDCliente) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
-            if ((listadoPrestamoPelicula[i] != null) && (listadoPrestamoPelicula[i].getIDCliente() == IDCliente)) {
+            if ((listadoPrestamoPelicula[i] != null) && (listadoPrestamoPelicula[i].getIDCliente() == IDCliente) &&((!(bucarPelicula(listadoPrestamoPelicula[i].getIDPelicula()).disponible)))) {
                 return bucarPelicula(listadoPrestamoPelicula[i].getIDPelicula());
             }
         }

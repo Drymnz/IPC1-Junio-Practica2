@@ -63,8 +63,8 @@ public class Reporte {
     public void topPeliculasMasPrestadasOMenosPrestadas(boolean acendenteODesendente){
         informacion.listadoPrestamoPelicula = (new Ordenamiento()).ordenarAscendente(informacion.listadoPrestamoPelicula);
         int cont = 0;
-        int [] contador = new int [informacion.listadoPelicula.length];
-        Pelicula [] contadorParalelo = new Pelicula[contador.length];
+        int [] contador = new int [informacion.listadoPrestamoPelicula.length];
+        Pelicula [] contadorParalelo = new Pelicula[informacion.listadoPrestamoPelicula.length];
         if (informacion.listadoPrestamoPelicula!=null) {
             for (int i = 0; i < informacion.listadoPrestamoPelicula.length; i++) {
                 for (int j = i+1; j < informacion.listadoPelicula.length-1; j++) {
@@ -78,17 +78,29 @@ public class Reporte {
                     contadorParalelo[i] = informacion.bucarPelicula(informacion.listadoPrestamoPelicula[i].getIDPelicula());                  
                 }
             }
-            contadorParalelo = (new Ordenamiento()).topPeliculas(contadorParalelo, contador, acendenteODesendente);
+            contadorParalelo = (new Ordenamiento()).topPeliculas(contadorParalelo, contador);
             if (contadorParalelo == null || contadorParalelo[0]==null) {
                 System.out.println(Star.colores(5)+"Ninguna pelicula a sido alquilada"+Star.colores(0));
             }else {
-                for (int i = 0; i < contadorParalelo.length; i++) {
-                    if (contadorParalelo[i] != null) {
-                        System.out.println("ID<" + Star.colores(3) + contadorParalelo[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + contadorParalelo[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + contadorParalelo[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + contadorParalelo[i].categoria + Star.colores(0) + ">" + "<"+ informacion.disponible(contadorParalelo[i].disponible) + ">"+contador[i]);
-                    } else {
-                        i = contadorParalelo.length;
+                if (acendenteODesendente) {
+                    for (int i = 0; i < contadorParalelo.length; i++) {
+                        if (contadorParalelo[i] != null) {
+                            System.out.println("ID<" + Star.colores(3) + contadorParalelo[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + contadorParalelo[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + contadorParalelo[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + contadorParalelo[i].categoria + Star.colores(0) + ">" + "<"+ informacion.disponible(contadorParalelo[i].disponible) + ">"+contador[i]);
+                        } else {
+                            i = contadorParalelo.length;
+                        }
+                    }
+                } else {
+                    System.out.println((contadorParalelo.length-1));
+                    for (int i = (contadorParalelo.length-1); i >= 0; i--) {
+                        if (contadorParalelo[i] != null) {
+                            System.out.println("ID<" + Star.colores(3) + contadorParalelo[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + contadorParalelo[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + contadorParalelo[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + contadorParalelo[i].categoria + Star.colores(0) + ">" + "<"+ informacion.disponible(contadorParalelo[i].disponible) + ">"+contador[i]);
+                        } else {
+                            i = contadorParalelo.length;
+                        }
                     }
                 }
+               
             }
         }
     }

@@ -65,10 +65,10 @@ public class MenuPrincipal {
 
         do {
             if ((usario != null)) {
-                if ((usario.getTienePeliculaPrestada())) {
+                Pelicula quePoseee = (catalogo.buscarPeliculaIDCliente(usario.getID()));
+                if ((usario.getTienePeliculaPrestada())&&(quePoseee!=null)) {
                     // si puede devolver una pelicula
                     Star.espacios();
-                    Pelicula quePoseee = (catalogo.buscarPeliculaIDCliente(usario.getID()));
                     System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
                     System.out.println("¿Devolvio la pelicula? --> <" + Star.colores(3) + quePoseee.nombre
                             + Star.colores(0) + "> (NOTA: Porfavor escribir SI o NO para responder)");
@@ -79,6 +79,7 @@ public class MenuPrincipal {
                             usario.setTienePeliculaPrestada(false);
                             quePoseee.setDisponible(true);
                         } while (!((!usario.getTienePeliculaPrestada())&&(quePoseee.disponible)));
+                        System.out.println(Star.colores(1)+"Fue devuelta la pelicula"+Star.colores(0));
                     }
                 } else {
                     Star.espacios();
