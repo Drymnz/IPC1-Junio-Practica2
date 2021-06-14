@@ -75,10 +75,11 @@ public class MenuPrincipal {
                     Star.espacios();
                     String afirmar = entrada.nextLine();
                     if (afirmar.equalsIgnoreCase("SI")) {
-                        usario.setTienePeliculaPrestada(false);
-                        quePoseee.setDisponible(true);
+                        do {
+                            usario.setTienePeliculaPrestada(false);
+                            quePoseee.setDisponible(true);
+                        } while (!((!usario.getTienePeliculaPrestada())&&(quePoseee.disponible)));
                     }
-
                 } else {
                     Star.espacios();
                     System.out.println(Star.colores(2) + "El usario no tiene ninguna pelicula" + Star.colores(0));

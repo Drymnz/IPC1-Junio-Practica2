@@ -5,21 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ManejoPelicula {
-    public Pelicula[] listadoPelicula = new Pelicula[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
-    public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
+    public Pelicula[] listadoPelicula = new Pelicula[1];
+    public PrestamoPelicula[] listadoPrestamoPelicula = new PrestamoPelicula[1];
     public ManejoPelicula() {
-        cargarCatalogo();
+      
     }
-
-    //eliminar este metodo solo es prueva si para ver como se ve en pantalla
-    public void cargarCatalogo() {
-        listadoPelicula[0] = new Pelicula(105, "Guasón", 2019, "Suspenso");
-        listadoPelicula[1] = new Pelicula(001, "The Karate Kid", 1984, "Aventura");
-        listadoPelicula[2] = new Pelicula(002, "The Karate Kid Part II", 1984, "Aventura");
-        listadoPelicula[3] = new Pelicula(003, "The Karate Kid Part III", 1989, "Aventura");
-        listadoPelicula[4] = new Pelicula(004, "Fight Club", 1999, "Suspenso");
-    }
-
     // mostrar peliculas disponibles
     public void verCatalogo() {
         for (int i = 0; i < listadoPelicula.length; i++) {
@@ -43,16 +33,27 @@ public class ManejoPelicula {
     public boolean addPelicula(String textoID, String nombre, String textoFecha, String categoria) {
         int ID = Integer.parseInt(textoID);
         if (!(existeIDPeliculas(ID))) {
-            for (int i = 0; i < listadoPelicula.length; i++) {
-                if ((listadoPelicula[i] == null)) {
-
-                    int fecha = Integer.parseInt(textoFecha);
-                    listadoPelicula[i] = new Pelicula(ID, nombre, fecha, categoria);
-                    return true;
+            do {
+                for (int i = 0; i < listadoPelicula.length; i++) {
+                    if ((listadoPelicula[i] == null)) {
+                        int fecha = Integer.parseInt(textoFecha);
+                        listadoPelicula[i] = new Pelicula(ID, nombre, fecha, categoria);
+                        return true;
+                    }
                 }
-            }
+                aumentarEspacioListadoPelicula();
+            } while (true);
         }
         return false;
+    }
+    private void aumentarEspacioListadoPelicula(){
+        int espacioAumentado = listadoPelicula.length + 3;
+        Pelicula[] nuevoListado = new Pelicula[espacioAumentado];
+        for (int i = 0; i < listadoPelicula.length; i++) {
+            nuevoListado[i] = listadoPelicula[i];
+        }
+        listadoPelicula = null;
+        listadoPelicula = nuevoListado;
     }
 
     // revisar si exite ya este ide en peliculas
@@ -144,11 +145,25 @@ public class ManejoPelicula {
 
     // este metodo realiza el registro de prestamo de peliculas
     public void addReservacionPelicula(Pelicula pelicula, Cliente usario, int diasPrestada) {
-        for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
-            if (listadoPrestamoPelicula[i] == null) { // null si esta vacio
-                listadoPrestamoPelicula[i] = new PrestamoPelicula(pelicula.ID, usario.getID(), diasPrestada);
-                i = listadoPrestamoPelicula.length;
+        boolean salir = true;
+        do {
+            for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
+                if (listadoPrestamoPelicula[i] == null) { // null si esta vacio
+                    listadoPrestamoPelicula[i] = new PrestamoPelicula(pelicula.ID, usario.getID(), diasPrestada);
+                    i = listadoPrestamoPelicula.length;
+                    salir = false;
+                }
             }
+            aumentarEspacioListadoReservacionPelicula();
+        } while (salir);
+    }
+    private void aumentarEspacioListadoReservacionPelicula(){
+        int espacioAumentado = listadoPrestamoPelicula.length + 3;
+        PrestamoPelicula[] nuevoListado = new PrestamoPelicula[espacioAumentado];
+        for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
+            nuevoListado[i] = listadoPrestamoPelicula[i];
         }
+        listadoPrestamoPelicula = null;
+        listadoPrestamoPelicula = nuevoListado;
     }
 }
