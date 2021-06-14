@@ -1,6 +1,8 @@
 package src;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ManejoPelicula {
     public Pelicula[] listadoPelicula = new Pelicula[Star.CUANTOS_DATOS_ALMACENA_EL_PROGRAMA];
@@ -68,15 +70,24 @@ public class ManejoPelicula {
         Pelicula alguilar = bucarPelicula(ID);
         if ((alguilar != null) && (alguilar.getDisponible()) && !(usario.getTienePeliculaPrestada())) {
             Star.espacios();
-            System.out.println("¿Cuantos dias la quieres? (NOTA: por favor solo numero)");
+            System.out.println("¿Cuantos dias la quieres alquilar? (NOTA: por favor solo numero)");
             Star.espacios();
-            int diasPrestada = new Scanner(System.in).nextInt();
-            addReservacionPelicula(alguilar, usario, diasPrestada);
-            usario.setTienePeliculaPrestada(true);
-            alguilar.setDisponible(false);
-            Star.espacios();
-            System.out.println(Star.colores(1) + "fue reseravado entregado tu pelicula, disfrutala" + Star.colores(0));
-            return true;
+            String diasPrestada = new Scanner(System.in).nextLine();
+            Pattern patron = Pattern.compile("[0-9]+");
+            Matcher matcher = patron.matcher(diasPrestada);
+            if (matcher.matches()) {
+                int dias = Integer.valueOf(diasPrestada);
+                addReservacionPelicula(alguilar, usario, dias);
+                usario.setTienePeliculaPrestada(true);
+                alguilar.setDisponible(false);
+                Star.espacios();
+                System.out.println(Star.colores(1) + "fue reseravado entregado tu pelicula, disfrutala" + Star.colores(0));
+                return true;
+            }else {
+                Star.espacios();
+                System.out.println(Star.colores(5) + "Incorrecto la fecha" + Star.colores(0));
+                return false ;
+            } 
         } else {
             Star.espacios();
             System.out.print(Star.colores(5));
@@ -134,7 +145,7 @@ public class ManejoPelicula {
     // este metodo realiza el registro de prestamo de peliculas
     public void addReservacionPelicula(Pelicula pelicula, Cliente usario, int diasPrestada) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
-            if (listadoPrestamoPelicula[i] == null) {
+            if (listadoPrestamoPelicula[i] == null) { // null si esta vacio
                 listadoPrestamoPelicula[i] = new PrestamoPelicula(pelicula.ID, usario.getID(), diasPrestada);
                 i = listadoPrestamoPelicula.length;
             }

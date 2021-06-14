@@ -59,7 +59,7 @@ public class MenuPrincipal {
 
     // para el menu devolver pelicula
     public void devolverPelciula() {
-        boolean salir = false;
+        boolean salir = true;
         String opcion = "";
         Star.espacios();
 
@@ -86,7 +86,7 @@ public class MenuPrincipal {
                     Star.espacios();
                 }
             } else {
-                while (!(opcion.equals("SALIR"))) {
+                while (!(opcion.equalsIgnoreCase("SALIR"))) {
                     System.out.println("<Presione 1> Para buscar cliente por medio del ID de la pelicula");
                     System.out.println("<Presione 2> Para buscar cliente en la base de datos");
                     System.out.println("<Escriba SALIR> Para regresar al menu anterior");
@@ -102,10 +102,15 @@ public class MenuPrincipal {
                             Star.espacios();
                             usario = manejoClientes.buscarClienteNombreID("",
                                     catalogo.reservoPelicula(entrada.nextInt()));
-                            opcion = "SALIR";
+                                    if (usario != null) {
+                                        opcion = "SALIR";
+                                    }
                             break;
                         case "2":
                             usario = buscarCliente();
+                            if (usario != null) {
+                                opcion = "SALIR";
+                            }
                             break;
                     }
                 }
@@ -135,8 +140,6 @@ public class MenuPrincipal {
                 catalogo.listadoPelicula = (new Ordenamiento()).ascendenteNombre(catalogo.listadoPelicula);
             }else if (matcher.matches()) {
                 if ((usario != null) && !(opcion.trim().equals(""))) {
-                    // convierto el opcion a int revisar por si errores aconsejable usar un try caht
-                    // para capturar el error
                     int ID = Integer.parseInt(opcion);
                     salir = catalogo.reservar(usario, ID);
                     opcion = "";
