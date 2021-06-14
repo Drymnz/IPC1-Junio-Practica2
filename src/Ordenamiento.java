@@ -81,7 +81,7 @@ public class Ordenamiento {
         }
         return listado;
     }
-    public Pelicula[] topPeliculas (Pelicula[] listadoPeliculas, int[] contador, boolean acendenteODesendente){
+    public Pelicula[] topPeliculas (Pelicula[] listadoPeliculas, int[] contador){
         int selecion = 0;
         Pelicula mover = null;
         int posicion = 0 ;
@@ -90,19 +90,11 @@ public class Ordenamiento {
             mover = listadoPeliculas[i];
             posicion = i;
             for (int j = i+1; j < contador.length; j++) {
-                if (acendenteODesendente) {
                     if (selecion > contador[j]) {
                         selecion = contador[j];
                         mover = listadoPeliculas[j];
                         posicion = j;
                     }
-                }else {
-                    if (selecion < contador[j]) {
-                        selecion = contador[j];
-                        mover = listadoPeliculas[j];
-                        posicion = j;
-                    }
-                }
             }
             contador[posicion] = contador[i];
             contador[i] = selecion;
