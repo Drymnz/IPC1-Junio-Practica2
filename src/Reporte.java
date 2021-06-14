@@ -62,36 +62,21 @@ public class Reporte {
     }
     public void topPeliculasMasPrestadasOMenosPrestadas(boolean acendenteODesendente){
         informacion.listadoPrestamoPelicula = (new Ordenamiento()).ordenarAscendente(informacion.listadoPrestamoPelicula); // si lo ordena bien
-        int cont = 0;
-        int [] contador = new int [informacion.listadoPrestamoPelicula.length];
-        Pelicula [] contadorParalelo = new Pelicula[informacion.listadoPrestamoPelicula.length];
+        int [] contador = new int [informacion.listadoPelicula.length];
+        Pelicula [] contadorParalelo = new Pelicula[informacion.listadoPelicula.length];
         if (informacion.listadoPrestamoPelicula!=null) {
+            // aqui cuenta cuantas veces una pelicula aparece en el listado de prestamoPelicuals
             for (int i = 0; i < informacion.listadoPelicula.length; i++) {
-                for (int j = 0; j < contadorParalelo.length; j++) {// j sera pra prestamos peliculas
+                for (int j = 0; j < informacion.listadoPrestamoPelicula.length; j++) {// j sera pra prestamos peliculas
                     if ((informacion.listadoPrestamoPelicula[j]!=null)&&(informacion.listadoPelicula[i]!=null) &&(informacion.listadoPelicula[i].ID == informacion.listadoPrestamoPelicula[j].getIDPelicula())) {
-                        contador[cont] ++;
+                        contador[i] ++;
                     }
                 }
+                contadorParalelo[i] = informacion.listadoPelicula[i];  
             }
-
-
-
-
-            for (int i = 0; i < contador.length; i++) {
-                    if (((informacion.listadoPrestamoPelicula[i]!=null)&&(informacion.listadoPrestamoPelicula[(i+1)]!=null))&&(informacion.listadoPrestamoPelicula[i].getIDPelicula() == informacion.listadoPrestamoPelicula[(i+1)].getIDPelicula())) {
-                        contador[cont] ++;
-                    }
-                if (informacion.listadoPrestamoPelicula[i]!=null) {
-                    contadorParalelo[cont] = informacion.bucarPelicula(informacion.listadoPrestamoPelicula[i].getIDPelicula());                  
-                    cont++;
-                }
-            }
-            for (int i = 0; i < contador.length; i++) {
-                System.out.print(Star.colores(5)+contador[i]+Star.colores(0));
-            }
-            System.out.println(   "   ");
+            //aqui ordena de forma ascendente respecto al contador
             contadorParalelo = (new Ordenamiento()).topPeliculas(contadorParalelo, contador);
-            if (contadorParalelo == null || contadorParalelo[0]==null) {
+            if ((contadorParalelo == null) && (contadorParalelo[0]==null)) {
                 System.out.println(Star.colores(5)+"Ninguna pelicula a sido alquilada"+Star.colores(0));
             }else {
                 if (acendenteODesendente) {
@@ -101,16 +86,13 @@ public class Reporte {
                         }
                     }
                 } else {
-                    System.out.println((contadorParalelo.length-1));
                     for (int i = (contadorParalelo.length-1); i >= 0; i--) {
                         if (contadorParalelo[i] != null) {
                             System.out.println("ID<" + Star.colores(3) + contadorParalelo[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + contadorParalelo[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + contadorParalelo[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + contadorParalelo[i].categoria + Star.colores(0) + ">" + "<"+ informacion.disponible(contadorParalelo[i].disponible) + ">");
                         } 
                     }
                 }
-               
             }
         }
     }
-    
 }

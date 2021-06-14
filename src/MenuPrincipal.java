@@ -98,6 +98,7 @@ public class MenuPrincipal {
                     System.out.println("<Escriba SALIR> Para regresar al menu anterior");
                     Star.espacios();
                     opcion = (new Scanner(System.in)).nextLine();
+                    Star.espacios();
                     switch (opcion) {
                         case "SALIR":
                             salir = false;
@@ -150,7 +151,8 @@ public class MenuPrincipal {
                     salir = catalogo.reservar(usario, ID);
                     opcion = "";
                 } else {
-                    System.out.println("Registre el cliente porfavor");
+                    Star.espacios();
+                    System.out.println("Registre al usario");
                     usario = registroCliente();
                 }
             }

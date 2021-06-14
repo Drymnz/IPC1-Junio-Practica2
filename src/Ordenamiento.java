@@ -83,14 +83,14 @@ public class Ordenamiento {
     }
     public Pelicula[] topPeliculas (Pelicula[] listadoPeliculas, int[] contador){
         int selecion = 0;
-        Pelicula mover = null;
         int posicion = 0 ;
+        Pelicula mover = null;
         for (int i = 0; i < contador.length; i++) {
             selecion = contador[i];
             mover = listadoPeliculas[i];
             posicion = i;
             for (int j = i+1; j < contador.length; j++) {
-                    if (selecion > contador[j]) {
+                    if (selecion < contador[j]) {
                         selecion = contador[j];
                         mover = listadoPeliculas[j];
                         posicion = j;
