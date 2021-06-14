@@ -45,10 +45,13 @@ public class MenuPrincipal {
                     break;
                 case "5":
                     usario = buscarCliente();
+                    break;
                 case "6":
                     (new Reporte(catalogo)).mostar();
+                    break;
                 case "7":
                     manejoClientes.mostrarListadoClientes(catalogo);
+                    break;
                 case "8":
                     usario = new Cliente("nombre", 0, 0);
                     usario = null;
@@ -79,6 +82,7 @@ public class MenuPrincipal {
                             usario.setTienePeliculaPrestada(false);
                             quePoseee.setDisponible(true);
                         } while (!((!usario.getTienePeliculaPrestada())&&(quePoseee.disponible)));
+                        Star.espacios();
                         System.out.println(Star.colores(1)+"Fue devuelta la pelicula"+Star.colores(0));
                     }
                 } else {
@@ -93,7 +97,7 @@ public class MenuPrincipal {
                     System.out.println("<Presione 2> Para buscar cliente en la base de datos");
                     System.out.println("<Escriba SALIR> Para regresar al menu anterior");
                     Star.espacios();
-                    opcion = entrada.nextLine();
+                    opcion = (new Scanner(System.in)).nextLine();
                     switch (opcion) {
                         case "SALIR":
                             salir = false;
