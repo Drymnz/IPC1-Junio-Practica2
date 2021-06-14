@@ -84,6 +84,8 @@ public class MenuPrincipal {
                         } while (!((!usario.getTienePeliculaPrestada())&&(quePoseee.disponible)));
                         Star.espacios();
                         System.out.println(Star.colores(1)+"Fue devuelta la pelicula"+Star.colores(0));
+                    }else {
+                        salir = false;
                     }
                 } else {
                     Star.espacios();
@@ -103,6 +105,7 @@ public class MenuPrincipal {
                     switch (opcion) {
                         case "0":
                             regresar = true;
+                            salir = false;
                             break;
                         case "1":
                             Star.espacios();
@@ -134,12 +137,12 @@ public class MenuPrincipal {
             Star.espacios();
             System.out.println("Usario <" + manejoClientes.informacionCliente(usario) + ">");
             catalogo.verCatalogo();
-            System.out.println("<Escriba el ID> ¿Cual desea alquilar?(NOTA:el que le aparece en ID<ID>)");
-            System.out.println("<Escriba Ordenar1 > Pordenar de forma ascendente respecto al nombre");
-            System.out.println("<Escriba Ordenar2 > Pordenar de forma ascendente respecto al categorias");
-            System.out.println("<Escriba Ordenar3 > Pordenar de forma ascendente respecto al ID");
-            System.out.println("<Escriba Ordenar4 > Pordenar de forma descendente respecto al ID");
-            System.out.println("<Presione 0 > Para regresar");
+            System.out.println("<"+Star.colores(4)+"Escriba el ID"+Star.colores(0)+"> ¿Cual desea alquilar?(NOTA:el que le aparece en ID<ID>)");
+            System.out.println("<"+Star.colores(2)+"Escriba Ordenar1 "+Star.colores(0)+"> Pordenar de forma ascendente respecto al nombre");
+            System.out.println("<"+Star.colores(2)+"Escriba Ordenar2 "+Star.colores(0)+"> Pordenar de forma ascendente respecto al categorias");
+            System.out.println("<"+Star.colores(2)+"Escriba Ordenar3 "+Star.colores(0)+"> Pordenar de forma ascendente respecto al ID");
+            System.out.println("<"+Star.colores(2)+"Escriba Ordenar4 "+Star.colores(0)+"> Pordenar de forma descendente respecto al ID");
+            System.out.println("<"+Star.colores(2)+"Presione 0 "+Star.colores(0)+"> Para regresar");
             Star.espacios();
             // verficador si es numero lo que se ingresa
             String opcion = entrada.nextLine();

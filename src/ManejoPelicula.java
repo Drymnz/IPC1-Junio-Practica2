@@ -14,7 +14,7 @@ public class ManejoPelicula {
     public void verCatalogo() {
         for (int i = 0; i < listadoPelicula.length; i++) {
             if (listadoPelicula[i] != null) {
-                System.out.println("ID<" + Star.colores(3) + listadoPelicula[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + listadoPelicula[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + listadoPelicula[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + listadoPelicula[i].categoria + Star.colores(0) + ">" + "<"+ disponible(listadoPelicula[i].disponible) + ">");
+                System.out.println("ID < " + Star.colores(3) + listadoPelicula[i].ID + Star.colores(0)+ " > NOMBRE DE LA PELICULA < " + Star.colores(3) + listadoPelicula[i].nombre + Star.colores(0)+ " > AÑO < " + Star.colores(3) + listadoPelicula[i].fecha + Star.colores(0) + " > CATEGORIA < "+ Star.colores(3) + listadoPelicula[i].categoria + Star.colores(0) + " >  < "+ disponible(listadoPelicula[i].disponible) + " >");
             } else {
                 i = listadoPelicula.length;
             }
@@ -71,7 +71,7 @@ public class ManejoPelicula {
         Pelicula alguilar = bucarPelicula(ID);
         if ((alguilar != null) && (alguilar.getDisponible()) && !(usario.getTienePeliculaPrestada())) {
             Star.espacios();
-            System.out.println("¿Cuantos dias la quieres alquilar? (NOTA: por favor solo numero)");
+            System.out.println("¿Si el cliente acepta aguardar en la tabla de pestamos la cantidad dias, escriba los DIAS de alquiler sino escriba NO?(NOTA: por favor los DIAS en numero)");
             Star.espacios();
             String diasPrestada = new Scanner(System.in).nextLine();
             Pattern patron = Pattern.compile("[0-9]+");
@@ -82,11 +82,11 @@ public class ManejoPelicula {
                 usario.setTienePeliculaPrestada(true);
                 alguilar.setDisponible(false);
                 Star.espacios();
-                System.out.println(Star.colores(1) + "fue reseravado entregado tu pelicula, disfrutala" + Star.colores(0));
+                System.out.println(Star.colores(1) + "Fue reseravado entregado tu pelicula, disfrutala" + Star.colores(0));
                 return true;
             }else {
                 Star.espacios();
-                System.out.println(Star.colores(5) + "Incorrecto la fecha" + Star.colores(0));
+                System.out.println(Star.colores(5) + "No fue reservado la pelicula" + Star.colores(0));
                 return false ;
             } 
         } else {
@@ -114,7 +114,7 @@ public class ManejoPelicula {
     // buscar la prestamoPelicula mediante el id de la palicula
     public int reservoPelicula(int ID) {
         for (int i = 0; i < listadoPrestamoPelicula.length; i++) {
-            if ((listadoPrestamoPelicula[i] != null) && (listadoPrestamoPelicula[i].getIDPelicula() == ID)) {
+            if ((listadoPrestamoPelicula[i] != null) && (listadoPrestamoPelicula[i].getIDPelicula() == ID)&&(!(bucarPelicula(ID).disponible))) {
                 return listadoPrestamoPelicula[i].getIDCliente();
             }
         }

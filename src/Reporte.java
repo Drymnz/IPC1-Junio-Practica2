@@ -8,12 +8,21 @@ public class Reporte {
     }
     public void mostar(){
         Star.espacios();
-        System.out.println("Reportes de peliculas cantidad de categorias diferentes < "+ cuantosCategoriasPelicula(informacion.listadoPelicula)+" >");
+        System.out.println(Star.colores(2)+"<< Reportes de peliculas cantidad de categorias diferentes >> < "+Star.colores(0)+ cuantosCategoriasPelicula(informacion.listadoPelicula)+Star.colores(2)+" >"+Star.colores(0));
         cantidadPorCategoria(informacion.listadoPelicula);
-        System.out.println("Top peliculas mas alquiladas");
+        System.out.println(Star.colores(2)+"<< Top peliculas mas alquiladas >>"+Star.colores(0));
         topPeliculasMasPrestadasOMenosPrestadas(true);
-        System.out.println("Top peliculas menos alquiladas");
+        System.out.println(Star.colores(2)+"<< Top peliculas menos alquiladas >>"+Star.colores(0));
         topPeliculasMasPrestadasOMenosPrestadas(false);
+        System.out.println(Star.colores(2)+"<< Tabla de prestamo >>"+Star.colores(0));
+        tablaPrestamo();
+    }
+    public void tablaPrestamo(){
+        for (int i = 0; i < informacion.listadoPrestamoPelicula.length; i++) {
+            if (informacion.listadoPrestamoPelicula[i]!=null) {
+                System.out.println("ID del cliente < "+informacion.listadoPrestamoPelicula[i].getIDCliente()+" > ID de la pelicula < "+informacion.listadoPrestamoPelicula[i].getIDPelicula()+" > la alquilo por : "+informacion.listadoPrestamoPelicula[i].getIdiasPrestada()+" DIAS");
+            }
+        }
     }
     // muestra cuantas cetegorias diferentes hay
     public int cuantosCategoriasPelicula(Pelicula[] listadoPelicula){
