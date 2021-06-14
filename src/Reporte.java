@@ -78,17 +78,17 @@ public class Reporte {
                     contadorParalelo[i] = informacion.bucarPelicula(informacion.listadoPrestamoPelicula[i].getIDPelicula());                  
                 }
             }
-            contadorParalelo = (new Ordenamiento()).topPeliculas(contadorParalelo, contador);
+            contadorParalelo = (new Ordenamiento()).topPeliculas(contadorParalelo, contador, acendenteODesendente);
             if (contadorParalelo == null || contadorParalelo[0]==null) {
                 System.out.println(Star.colores(5)+"Ninguna pelicula a sido alquilada"+Star.colores(0));
             }else {
-                    for (int i = 0; i < contadorParalelo.length; i++) {
-                        if (contadorParalelo[i] != null) {
-                            System.out.println("ID<" + Star.colores(3) + contadorParalelo[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + contadorParalelo[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + contadorParalelo[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + contadorParalelo[i].categoria + Star.colores(0) + ">" + "<"+ informacion.disponible(contadorParalelo[i].disponible) + ">");
-                        } else {
-                            i = contadorParalelo.length;
-                        }
+                for (int i = 0; i < contadorParalelo.length; i++) {
+                    if (contadorParalelo[i] != null) {
+                        System.out.println("ID<" + Star.colores(3) + contadorParalelo[i].ID + Star.colores(0)+ ">NOMBRE DE LA PELICULA:<" + Star.colores(3) + contadorParalelo[i].nombre + Star.colores(0)+ "> AÑO <" + Star.colores(3) + contadorParalelo[i].fecha + Star.colores(0) + "> CATEGORIA <"+ Star.colores(3) + contadorParalelo[i].categoria + Star.colores(0) + ">" + "<"+ informacion.disponible(contadorParalelo[i].disponible) + ">"+contador[i]);
+                    } else {
+                        i = contadorParalelo.length;
                     }
+                }
             }
         }
     }
